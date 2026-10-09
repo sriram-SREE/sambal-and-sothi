@@ -1531,25 +1531,20 @@ h1, h2, h3, h4, .section-title, .hero-title {
   }
 }
 
-/* Mobile Swipeable Culinary Art / Dishes Carousel Container */
+/* Normal Grid Layout for Dishes (Non-Swipeable, Natural Vertical Scroll) */
 @media (max-width: 768px) {
   .dishes-grid {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
     gap: 1.25rem !important;
-    padding-bottom: 1.25rem !important;
-    scroll-padding-left: 1rem !important;
-    scrollbar-width: none !important;
-  }
-  .dishes-grid::-webkit-scrollbar {
-    display: none !important;
+    overflow-x: visible !important;
+    padding-bottom: 0 !important;
   }
   .dishes-grid .dish-card {
-    flex: 0 0 85% !important;
-    min-width: 85% !important;
-    scroll-snap-align: center !important;
+    flex: unset !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    scroll-snap-align: unset !important;
   }
 }
 
@@ -1603,8 +1598,10 @@ h1, h2, h3, h4, .section-title, .hero-title {
 }
 
 .book-cover-logo {
-  width: 90px !important;
-  height: 90px !important;
+  width: 140px !important;
+  height: 140px !important;
+  max-width: 140px !important;
+  max-height: 140px !important;
   object-fit: contain !important;
 }
 
@@ -3190,10 +3187,12 @@ html, body {
   }
 
   .book-cover-logo {
-  width: 90px !important;
-  height: 90px !important;
-  object-fit: contain !important;
-}
+    width: 110px !important;
+    height: 110px !important;
+    max-width: 110px !important;
+    max-height: 110px !important;
+    object-fit: contain !important;
+  }
 
   .cover-top-emblem {
     margin-bottom: 0 !important;
@@ -3382,9 +3381,12 @@ html, body {
     gap: 1.5rem !important;
   }
   .book-cover-logo {
-    width: 65px !important;
-    height: 65px !important;
-    margin-bottom: 0.25rem !important;
+    width: 110px !important;
+    height: 110px !important;
+    max-width: 110px !important;
+    max-height: 110px !important;
+    margin-bottom: 0.35rem !important;
+    object-fit: contain !important;
   }
 }
 
