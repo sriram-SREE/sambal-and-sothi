@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 850" width="100%" height="100%">
+  <rect width="600" height="850" fill="#0D3129"/>
+  
+  <!-- Outer & Inner Champagne Hairline Frame -->
+  <rect x="35" y="45" width="530" height="760" fill="none" stroke="#C9A227" stroke-width="1"/>
+  <rect x="39" y="49" width="522" height="752" fill="none" stroke="rgba(232,200,138,0.22)" stroke-width="1"/>
+  
+  <!-- Top Rule Breakout Section Title -->
+  <rect x="140" y="35" width="320" height="25" fill="#0D3129"/>
+  <text x="300" y="52" text-anchor="middle" fill="#E8C88A" font-family="Cormorant Garamond, Georgia, serif" font-size="24" font-weight="500" letter-spacing="4">GRAVIES &amp; CURRIES</text>
+  
+  <text x="300" y="105" text-anchor="middle" fill="#BDAF99" font-family="Jost, sans-serif" font-size="11" font-weight="400" letter-spacing="3">SAMBAL &amp; SOTHI · SINGAPORE</text>
+  <line x1="220" y1="125" x2="380" y2="125" stroke="rgba(232,200,138,0.3)" stroke-width="1"/>
+  
+  <!-- Two Column Dish Grid -->
+  <g font-family="Cormorant Garamond, Georgia, serif">
+    
+        <text x="55" y="190" fill="#F3EDE3" font-size="15.0px" font-weight="500">Chicken Curry Gravy</text>
+        <line x1="186" y1="186" x2="235" y2="186" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="285" y="190" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$3.50</text>
+        <text x="55" y="234" fill="#F3EDE3" font-size="16.5px" font-weight="500">Fish Curry Gravy</text>
+        <line x1="178" y1="230" x2="235" y2="230" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="285" y="234" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$3.50</text>
+        <text x="55" y="278" fill="#F3EDE3" font-size="15.0px" font-weight="500">Mutton Curry Gravy</text>
+        <line x1="180" y1="274" x2="235" y2="274" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="285" y="278" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$4.00</text>
+        <text x="55" y="322" fill="#F3EDE3" font-size="16.5px" font-weight="500">Vegetable Kurma</text>
+        <line x1="171" y1="318" x2="235" y2="318" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="285" y="322" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$3.00</text>
+        <text x="55" y="366" fill="#F3EDE3" font-size="16.5px" font-weight="500">Sambar Gravy</text>
+        <line x1="149" y1="362" x2="235" y2="362" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="285" y="366" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$2.50</text>
+    
+        <text x="315" y="190" fill="#F3EDE3" font-size="14.0px" font-weight="500">White Sothi (Signature)</text>
+        <line x1="456" y1="186" x2="495" y2="186" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="545" y="190" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$3.50</text>
+        <text x="315" y="234" fill="#F3EDE3" font-size="15.0px" font-weight="500">Mutton Bone Marrow</text>
+        <line x1="440" y1="230" x2="486" y2="230" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="545" y="234" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$12.50</text>
+        <text x="315" y="278" fill="#F3EDE3" font-size="16.5px" font-weight="500">Crab Curry</text>
+        <line x1="395" y1="274" x2="486" y2="274" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="545" y="278" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$14.00</text>
+        <text x="315" y="322" fill="#F3EDE3" font-size="16.5px" font-weight="500">Prawn Curry</text>
+        <line x1="402" y1="318" x2="495" y2="318" stroke="rgba(232,200,138,0.22)" stroke-dasharray="1 3"/>
+        <text x="545" y="322" text-anchor="end" fill="#E8C88A" font-size="16px" font-weight="600">$8.50</text>
+  </g>
+  
+  <!-- Bottom Engraved Rule -->
+  <line x1="120" y1="760" x2="200" y2="760" stroke="#C9A227" stroke-width="1"/>
+  <line x1="400" y1="760" x2="480" y2="760" stroke="#C9A227" stroke-width="1"/>
+  <text x="300" y="764" text-anchor="middle" fill="#E8C88A" font-family="Jost, sans-serif" font-size="11" font-weight="500" letter-spacing="2">◆ CALL TO ORDER · +65 8398 3865 ◆</text>
+</svg>
