@@ -573,16 +573,70 @@ h1, h2, h3, h4, .section-title, .hero-title {
   align-items: stretch;
 }
 
+.social-swipe-hint {
+  display: none;
+}
+
 @media (max-width: 992px) {
   .social-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .social-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 1rem !important;
+    padding: 0.5rem 0.25rem 1rem !important;
+    scroll-padding-left: 0.75rem !important;
+    scroll-padding-right: 0.75rem !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .social-grid::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  .social-card {
+    min-width: 75% !important;
+    max-width: 80% !important;
+    flex: 0 0 78% !important;
+    scroll-snap-align: center !important;
+    padding: 1.5rem 1.15rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .social-swipe-hint {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--color-accent-gold-light);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    opacity: 0.85;
+  }
+}
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .about-story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
   }
 }
 
@@ -1513,26 +1567,7 @@ h1, h2, h3, h4, .section-title, .hero-title {
   display: block;
 }
 
-/* ----------------------------------------------------
-   SELF-HOSTED FONTS (GDPR / Schrems II Compliance)
-   ---------------------------------------------------- */
-@font-face {
-  font-family: 'Cormorant Garamond';
-  font-style: normal;
-  font-weight: 300 700;
-  font-display: swap;
-  src: local('Cormorant Garamond'),
-       url('../fonts/cormorant-garamond.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Jost';
-  font-style: normal;
-  font-weight: 200 600;
-  font-display: swap;
-  src: local('Jost'),
-       url('../fonts/jost.woff2') format('woff2');
-}
+/* Fonts loaded via Google Fonts CDN in document head */
 
 /* ----------------------------------------------------
    DYNAMIC MENU BOOK PAGE STYLING (Option B CPT Engine)
@@ -2710,8 +2745,11 @@ body:not(:has(#wpadminbar)) .site-header {
     padding-bottom: 6rem !important;
   }
 
-  body, main, .site-main, .container {
-    padding-bottom: 5.5rem !important;
+  body {
+    padding-bottom: 3.5rem !important;
+  }
+  .container {
+    padding-bottom: 0 !important;
   }
 }
 
@@ -3510,7 +3548,7 @@ html, body {
   }
   .artisanal-row.reverse-mobile {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   .artisanal-plate-img {
     max-width: 280px !important;
