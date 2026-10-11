@@ -324,38 +324,8 @@ function initNativeBookViewer() {
     }
   };
 
-  if (wrapper) {
-    wrapper.addEventListener('click', (e) => {
-      if (isFlipping) return;
-      const rect = wrapper.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      if (clickX < rect.width / 2) {
-        window.prevBookPage();
-      } else {
-        window.nextBookPage();
-      }
-    });
-
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    wrapper.addEventListener('touchstart', (e) => {
-      if (e.changedTouches && e.changedTouches[0]) {
-        touchStartX = e.changedTouches[0].clientX;
-      }
-    }, { passive: true });
-
-    wrapper.addEventListener('touchend', (e) => {
-      if (isFlipping || !e.changedTouches || !e.changedTouches[0]) return;
-      const touchEndX = e.changedTouches[0].clientX;
-      const diffX = touchEndX - touchStartX;
-      if (diffX < -40) {
-        window.nextBookPage();
-      } else if (diffX > 40) {
-        window.prevBookPage();
-      }
-    }, { passive: true });
-  }
-
+  // Intentional page turns only via Previous/Next buttons, Category Chips, or Keyboard arrows
+  // (No touch/click listener on wrapper so scrolling never causes accidental page turns)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') window.nextBookPage();
     if (e.key === 'ArrowLeft') window.prevBookPage();

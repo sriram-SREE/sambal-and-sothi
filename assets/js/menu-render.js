@@ -144,22 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>`;
     } else {
       
-      const catIcons = {
-        'Specials': '🌶️',
-        'Sambal & Sothi Specials': '🌶️',
-        'Indian Classic': '🥞',
-        'Thosai': '🥞',
-        'Fried Veg & Non-Veg': '🍤',
-        'Prata': '🫓',
-        'Kothu Prata & Egg Dishes': '🍳',
-        'Gravy & Curry': '🍛',
-        'Goreng': '🍜',
-        'Briyani & Set Meals': '🍚',
-        'Hot Drinks': '☕ 🫘',
-        'Cold Drinks': '🍹 🧊'
-      };
       let catNames = pageCategories[i] ? pageCategories[i].join(' &amp; ') : '';
-      let catIcon = catIcons[catNames] || '❖';
 
       let itemsHtml = '';
       
@@ -169,12 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
           if (item.tags && item.tags.length) {
             tagsHtml = '<div class="item-tags">' + item.tags.map(t => `<span class="item-tag">${escapeHtml(t)}</span>`).join('') + '</div>';
           }
+          const cleanPrice = String(item.price || '').replace(/S\$/gi, '$');
           
           return `
             <div class="menu-page-item" data-tags="${(item.tags || []).join(',')}">
               <div class="menu-page-item-info">
                 <span class="item-name">${escapeHtml(item.name)}</span>
-                <span class="item-price">${escapeHtml(item.price)}</span>
+                <span class="item-price">${escapeHtml(cleanPrice)}</span>
               </div>
               <p class="item-desc">${escapeHtml(item.description)}</p>
               ${tagsHtml}
@@ -184,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       content = `
-        <div class="page-header"><h2><span style='margin-right:8px;'>${catIcon}</span>${catNames}</h2></div>
+        <div class="page-header"><h2>${catNames}</h2></div>
         <div class="menu-page-items">${itemsHtml}</div>
       `;
     }
