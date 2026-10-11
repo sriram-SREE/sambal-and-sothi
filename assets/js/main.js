@@ -324,8 +324,66 @@ function initNativeBookViewer() {
     }
   };
 
-  // Intentional page turns only via Previous/Next buttons, Category Chips, or Keyboard arrows
-  // (No touch/click listener on wrapper so scrolling never causes accidental page turns)
+  // Smart Left/Right Empty-Area Tap Turn (Blocks accidental turns while scrolling or touching dishes/buttons)
+  if (wrapper && !window.__ssSmartBookTapBound) {
+    window.__ssSmartBookTapBound = true;
+    let pDownX = 0;
+    let pDownY = 0;
+    let pDownTime = 0;
+    let pDownScrollY = 0;
+    let pMoved = false;
+    let lastScrollTs = 0;
+
+    const recordScroll = () => { lastScrollTs = Date.now(); pMoved = true; };
+    window.addEventListener('scroll', recordScroll, { passive: true });
+    wrapper.addEventListener('scroll', recordScroll, { capture: true, passive: true });
+
+    wrapper.addEventListener('pointerdown', (e) => {
+      if (e.isPrimary === false) { pMoved = true; return; }
+      pDownX = e.clientX;
+      pDownY = e.clientY;
+      pDownTime = Date.now();
+      pDownScrollY = window.scrollY;
+      pMoved = false;
+    }, { passive: true });
+
+    wrapper.addEventListener('pointermove', (e) => {
+      if (Math.abs(e.clientX - pDownX) > 7 || Math.abs(e.clientY - pDownY) > 7) {
+        pMoved = true;
+      }
+    }, { passive: true });
+
+    wrapper.addEventListener('pointerup', (e) => {
+      if (pMoved || isFlipping) return;
+      const now = Date.now();
+      const duration = now - pDownTime;
+      const dx = Math.abs(e.clientX - pDownX);
+      const dy = Math.abs(e.clientY - pDownY);
+      const scrollDiff = Math.abs(window.scrollY - pDownScrollY);
+
+      // 1. Block if scrolling occurred, finger moved > 7px, or hold lasted > 300ms
+      if (dx > 7 || dy > 7 || scrollDiff > 2 || duration > 300 || (now - lastScrollTs) < 400) {
+        return;
+      }
+
+      // 2. Block if user touched dish text, price, description, tag, header, or interactive element
+      if (e.target && e.target.closest && e.target.closest('a, button, input, select, textarea, .item-name, .item-price, .item-desc, .item-tag, .page-header h2')) {
+        return;
+      }
+
+      // 3. Only turn page when tapping empty area on the Left (< 30%) or Right (> 70%) side
+      const rect = wrapper.getBoundingClientRect();
+      if (!rect.width) return;
+      const relX = (e.clientX - rect.left) / rect.width;
+
+      if (relX > 0.70) {
+        window.nextBookPage();
+      } else if (relX < 0.30) {
+        window.prevBookPage();
+      }
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') window.nextBookPage();
     if (e.key === 'ArrowLeft') window.prevBookPage();
