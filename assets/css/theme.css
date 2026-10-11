@@ -416,6 +416,26 @@ body {
   color: var(--color-accent-gold-light);
 }
 
+.mobile-nav a.btn-primary {
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text-main) !important;
+  border: 1px solid var(--color-border-gold-strong) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  padding: 0.85rem 1.75rem !important;
+  margin-top: 0.5rem;
+}
+
+.mobile-nav a.btn-primary:hover,
+.mobile-nav a.btn-primary:focus,
+.mobile-nav a.btn-primary:active {
+  background-color: var(--color-brand-emerald) !important;
+  color: var(--color-accent-gold-light) !important;
+  border-color: var(--color-accent-gold-light) !important;
+}
+
 .mobile-nav-close {
   position: absolute;
   top: 1.5rem;
