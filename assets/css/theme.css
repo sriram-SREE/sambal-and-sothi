@@ -3641,3 +3641,118 @@ html, body {
     line-height: 1.35 !important;
   }
 }
+
+/* ==========================================================================
+   CONTACT PAGE & TIMINGS ALIGNMENT (PC & MOBILE)
+   ========================================================================== */
+.contact-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+  align-items: stretch;
+}
+
+.contact-card-box {
+  border: 1px solid var(--color-border-gold);
+  padding: 2.5rem;
+  background: var(--color-bg-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.contact-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(232, 200, 138, 0.14);
+}
+
+.contact-info-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.contact-info-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light);
+  margin: 0 !important;
+  line-height: 1.3;
+}
+
+.contact-info-value {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 400;
+  color: var(--color-text-main);
+  margin: 0 !important;
+  line-height: 1.55;
+}
+
+.contact-info-value.highlight-gold {
+  color: var(--color-accent-gold-light);
+  font-weight: 500;
+  font-size: 1.06rem;
+}
+
+.contact-info-note {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  margin: 0.1rem 0 0 0 !important;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 2.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-card-box {
+    padding: 1.5rem 1.25rem !important;
+  }
+  .contact-info-list {
+    gap: 1.1rem !important;
+  }
+  .contact-info-item {
+    gap: 0.2rem !important;
+    padding-bottom: 0.95rem !important;
+  }
+  .contact-info-label {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.18em !important;
+    margin: 0 !important;
+  }
+  .contact-info-value {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+  }
+  .contact-info-value.highlight-gold {
+    font-size: 0.98rem !important;
+  }
+  .contact-info-note {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+    margin: 0.1rem 0 0 0 !important;
+  }
+}
+

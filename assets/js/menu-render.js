@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="cover-footer-info">
       <p class="cover-address">41 Chander Road, Little India, Singapore 219543</p>
       <p class="cover-phone">Reservations: +65 8398 3865 / +65 8782 9193</p>
-      <div class="cover-hours-badge">OPEN DAILY: 9:30 AM – 10:30 PM</div>
+      <div class="cover-hours-badge">OPEN DAILY: 9:00 AM – 10:30 PM</div>
     </div>
   </div>
 </div>`;
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="cover-footer-info">
       <p class="cover-address">41 Chander Road, Little India, Singapore 219543</p>
       <p class="cover-phone">Reservations: +65 8398 3865 / +65 8782 9193</p>
-      <div class="cover-hours-badge">OPEN DAILY: 9:30 AM – 10:30 PM</div>
+      <div class="cover-hours-badge">OPEN DAILY: 9:00 AM – 10:30 PM</div>
     </div>
   </div>
 </div>`;

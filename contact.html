@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/theme.css?v=2.2">
+  <link rel="stylesheet" href="assets/css/theme.css?v=2.5">
   <script>window.SS_THEME_URI = window.location.origin;</script>
 </head>
 <body>
@@ -83,85 +83,89 @@
     <div class="container">
       
       <!-- CONTACT GRID: CONTACT INFO & FORM -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-bottom: 4rem; align-items: start;">
+      <div class="contact-cards-grid">
         
         <!-- LEFT: CONTACT INFORMATION CARD -->
-        <div class="hours-card" style="border: 1px solid var(--color-border-gold); padding: 2.5rem; background: var(--color-bg-card);">
-          <div class="section-tag">RESERVATIONS &amp; LOCATION</div>
-          <h2 class="hours-title" style="margin-bottom: 1.5rem;">Get In Touch</h2>
-          
-          <div style="display: flex; flex-direction: column; gap: 1.75rem;">
-            <div>
-              <div class="section-tag" style="font-size: 0.7rem;">ADDRESS</div>
-              <p class="section-desc" style="color: var(--color-text-main); margin-top: 0.35rem; line-height: 1.6;">
-                41 Chander Road, Little India,<br>Singapore 219543
-              </p>
-            </div>
+        <div class="hours-card contact-card-box">
+          <div>
+            <div class="section-tag" style="margin-bottom: 0.35rem;">RESERVATIONS &amp; LOCATION</div>
+            <h2 class="hours-title" style="margin-bottom: 1.5rem;">Get In Touch</h2>
             
-            <div>
-              <div class="section-tag" style="font-size: 0.7rem;">RESERVATIONS &amp; ORDERS</div>
-              <p class="section-desc" style="margin-top: 0.35rem;">
-                <a href="tel:+6583983865" style="color: var(--color-accent-gold-light); text-decoration: none; font-weight: 500; font-size: 1.1rem;">+65 8398 3865</a>
-                <span style="color: var(--color-border-gold); margin: 0 0.5rem;">/</span>
-                <a href="tel:+6587829193" style="color: var(--color-accent-gold-light); text-decoration: none; font-weight: 500; font-size: 1.1rem;">+65 8782 9193</a>
-              </p>
-            </div>
-            
-            <div>
-              <div class="section-tag" style="font-size: 0.7rem;">EMAIL</div>
-              <p class="section-desc" style="margin-top: 0.35rem;">
-                <a href="mailto:Sambalandsothi@gmail.com" style="color: var(--color-accent-gold-light); text-decoration: none;">✉ Sambalandsothi@gmail.com</a>
-              </p>
-            </div>
-            
-            <div>
-              <div class="section-tag" style="font-size: 0.7rem;">TIMINGS &amp; OPENING HOURS</div>
-              <p class="section-desc" style="color: var(--color-accent-gold-light); margin-top: 0.35rem; font-weight: 500;">
-                Open Daily: 10:30 AM – 10:30 PM (10.30 – 22.30)
-              </p>
-              <p class="section-desc" style="color: var(--color-text-muted); font-size: 0.85rem; margin-top: 0.25rem;">
-                Dine-in, Takeaway &amp; Delivery available all 7 days a week. For group bookings, please call ahead.
-              </p>
-            </div>
-            
-            <div>
-              <div class="section-tag" style="font-size: 0.7rem;">SOCIAL MEDIA</div>
-              <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.35rem;">
-                <a href="https://www.instagram.com/sambalandsothi" target="_blank" rel="noopener" style="color: var(--color-text-main); text-decoration: none;">Instagram: @sambalandsothi</a>
-                <a href="https://www.facebook.com/sambalandsothi" target="_blank" rel="noopener" style="color: var(--color-text-main); text-decoration: none;">Facebook: Sambal &amp; Sothi</a>
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <div class="contact-info-label">ADDRESS</div>
+                <p class="contact-info-value">
+                  41 Chander Road, Little India, Singapore 219543
+                </p>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-label">RESERVATIONS &amp; ORDERS</div>
+                <p class="contact-info-value">
+                  <a href="tel:+6583983865" style="color: var(--color-accent-gold-light); text-decoration: none; font-weight: 500; font-size: 1.08rem;">+65 8398 3865</a>
+                  <span style="color: var(--color-border-gold); margin: 0 0.5rem;">/</span>
+                  <a href="tel:+6587829193" style="color: var(--color-accent-gold-light); text-decoration: none; font-weight: 500; font-size: 1.08rem;">+65 8782 9193</a>
+                </p>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-label">EMAIL</div>
+                <p class="contact-info-value">
+                  <a href="mailto:Sambalandsothi@gmail.com" style="color: var(--color-accent-gold-light); text-decoration: none;">✉ Sambalandsothi@gmail.com</a>
+                </p>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-label">TIMINGS &amp; OPENING HOURS</div>
+                <p class="contact-info-value highlight-gold">
+                  Open Daily: 9:00 AM – 10:30 PM (09.00 – 22.30)
+                </p>
+                <p class="contact-info-note">
+                  Dine-in, Takeaway &amp; Delivery available all 7 days a week. For group bookings, please call ahead.
+                </p>
+              </div>
+              
+              <div class="contact-info-item">
+                <div class="contact-info-label">SOCIAL MEDIA</div>
+                <div style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.1rem;">
+                  <a href="https://www.instagram.com/sambalandsothi" target="_blank" rel="noopener" class="contact-info-value" style="text-decoration: none;">Instagram: @sambalandsothi</a>
+                  <a href="https://www.facebook.com/sambalandsothi" target="_blank" rel="noopener" class="contact-info-value" style="text-decoration: none;">Facebook: Sambal &amp; Sothi</a>
+                </div>
               </div>
             </div>
           </div>
           
-          <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-gold);">
+          <div style="margin-top: 1.75rem; padding-top: 1.35rem; border-top: 1px solid var(--color-border-gold);">
             <a href="https://maps.google.com/?q=41+Chander+Road+Singapore+219543" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; text-align: center; display: block; text-decoration: none;">📍 Open in Google Maps</a>
           </div>
         </div>
 
         <!-- RIGHT: SEND MESSAGE FORM -->
-        <div class="hours-card" style="border: 1px solid var(--color-border-gold); padding: 2.5rem; background: var(--color-bg-card);">
-          <div class="section-tag">DROP US A LINE</div>
-          <h2 class="hours-title" style="margin-bottom: 1.5rem;">Send Us a Message</h2>
-          
-          <form class="contact-demo-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact">
-            <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
-            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-              <div>
-                <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Your Name *</label>
-                <input type="text" name="name" required placeholder="e.g. John Tan" style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;">
+        <div class="hours-card contact-card-box">
+          <div style="width: 100%;">
+            <div class="section-tag" style="margin-bottom: 0.35rem;">DROP US A LINE</div>
+            <h2 class="hours-title" style="margin-bottom: 1.5rem;">Send Us a Message</h2>
+            
+            <form class="contact-demo-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none;"><label>Don’t fill this out: <input name="bot-field"></label></p>
+              <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div>
+                  <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Your Name *</label>
+                  <input type="text" name="name" required placeholder="e.g. John Tan" style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;">
+                </div>
+                <div>
+                  <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Phone Number *</label>
+                  <input type="tel" name="phone" required placeholder="+65 8000 0000" style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;">
+                </div>
+                <div>
+                  <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Message / Reservation Request *</label>
+                  <textarea name="message" rows="5" required placeholder="Party size, date, preferred timing or dietary requirements..." style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; text-align: center; padding: 0.9rem 2rem; cursor: pointer; border: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; margin-top: 0.35rem;">Send Message</button>
               </div>
-              <div>
-                <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Phone Number *</label>
-                <input type="tel" name="phone" required placeholder="+65 8000 0000" style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;">
-              </div>
-              <div>
-                <label style="display: block; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-accent-gold-light); margin-bottom: 0.4rem;">Message / Reservation Request *</label>
-                <textarea name="message" rows="4" required placeholder="Party size, date, preferred timing or dietary requirements..." style="width: 100%; background: var(--color-bg-primary); border: 1px solid var(--color-border-gold); color: var(--color-text-main); padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem; border-radius: 2px;"></textarea>
-              </div>
-              <button type="submit" class="btn-primary" style="padding: 0.85rem 2rem; cursor: pointer; border: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; align-self: flex-start;">Send Message</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
 
       </div>
@@ -191,7 +195,7 @@
             Authentic Flavors. Timeless Traditions. Unforgettable Experiences.
           </p>
           <div style="margin-top:0.75rem;color:var(--color-accent-gold-light);font-size:0.875rem;">
-            🕒 <strong>Open Daily:</strong> 10:30 AM – 10:30 PM (Dine-in, Takeaway &amp; Delivery)
+            🕒 <strong>Open Daily:</strong> 9:00 AM – 10:30 PM (Dine-in, Takeaway &amp; Delivery)
           </div>
         </div>
         <div>
