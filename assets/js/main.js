@@ -3,9 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
   initPreloader();
   initPageTransitions();
   initMobileNav();
+  initScrollHeader();
   initNativeBookViewer();
   initReviewsSlider();
 });
+
+function initScrollHeader() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const onScroll = () => {
+    if (window.scrollY > 24) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
 
 // Category to Native Page Index Mapping (1-indexed)
 const CATEGORY_PAGES = {

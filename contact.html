@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/theme.css?v=4.7">
+  <link rel="stylesheet" href="assets/css/theme.css?v=4.9">
   <script>window.SS_THEME_URI = window.location.origin;</script>
 </head>
 <body>
@@ -40,7 +40,7 @@
         <svg class="btn-reserve-icon-svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
         <span class="btn-reserve-text-full">Call to Reserve</span><span class="btn-reserve-text-short">Reserve</span>
       </a>
-      <button type="button" class="burger-btn" id="burger-btn" aria-label="Open menu">&#8801;</button>
+      <button type="button" class="burger-btn" id="burger-btn" aria-label="Open menu"><svg class="burger-icon-svg" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="1" y1="2" x2="21" y2="2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="5" y1="8" x2="21" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="1" y1="14" x2="21" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
     </div>
   </header>
 
@@ -58,7 +58,7 @@
   </a>
 
   <!-- CLEAR FULL VIDEO CONTAINER WITH SOUND (NO OVERLAY TEXT) -->
-  <section class="section contact-video-section" style="padding: 0; background: #000; overflow: hidden; position: relative;">
+  <section class="section contact-video-section" style="padding: 0; background: var(--color-bg-deep, #08221C); overflow: hidden; position: relative;">
     <div class="contact-video-inner" style="width: 100%; max-width: var(--ss-container-width, 1240px); margin: 0 auto;">
       <video id="contact-video-player" autoplay loop muted playsinline disablePictureInPicture controlsList="nodownload noremoteplayback noplaybackrate" style="width: 100%; max-height: 75vh; object-fit: cover; display: block; margin: 0 auto; background: #000; border-bottom: 2px solid var(--color-accent-gold-light); pointer-events: none;">
         <source src="assets/video/contact-hero.mp4" type="video/mp4">
@@ -228,6 +228,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=4.7" defer></script>
+  <script src="assets/js/main.js?v=4.9" defer></script>
 </body>
 </html>

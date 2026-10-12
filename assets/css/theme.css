@@ -3778,37 +3778,46 @@ html, body {
 }
 
 /* ==========================================================================
-   END-TO-END ALIGNMENT PERFECTION & HEADER PROPORTION SYSTEM
+   END-TO-END ALIGNMENT PERFECTION & LUXURY HOSPITALITY REFINEMENTS
    (HOME -> MENU -> ABOUT -> CONTACT -> FOOTER)
    ========================================================================== */
 
 :root {
-  --ss-header-height: 92px;
-  --ss-header-height-mobile: 74px;
+  --ss-header-height: 102px;
+  --ss-header-height-mobile: 78px;
   --ss-header-gutter: 24px;
   --ss-header-gutter-mobile: 16px;
-  --ss-logo-height: 50px;
-  --ss-logo-height-mobile: 40px;
+  --ss-logo-height: 58px;
+  --ss-logo-height-mobile: 46px;
 }
 
 html {
-  scroll-padding-top: calc(var(--ss-header-height, 92px) + 12px);
+  scroll-padding-top: calc(var(--ss-header-height, 102px) + 12px);
 }
 
 section, .section {
-  scroll-margin-top: calc(var(--ss-header-height, 92px) + 12px);
+  scroll-margin-top: calc(var(--ss-header-height, 102px) + 12px);
 }
 
-/* 1. Coordinated Header Proportions, Typography & Flush Vertical Axis Alignment */
+/* 1. Scroll-Aware Glass Header, Proportions, SVG Burger & Mobile Declutter */
 .site-header {
   width: 100%;
   box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.site-header.is-scrolled {
+  background-color: rgba(11, 43, 36, 0.95) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+  border-bottom-color: rgba(232, 200, 138, 0.45) !important;
 }
 
 .header-container {
   width: 100%;
   max-width: var(--ss-container-width, 1240px) !important;
-  min-height: var(--ss-header-height, 92px) !important;
+  min-height: var(--ss-header-height, 102px) !important;
   margin-inline: auto !important;
   padding: 12px var(--ss-header-gutter, 24px) !important;
   display: flex !important;
@@ -3821,14 +3830,14 @@ section, .section {
 .brand-logo {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 13px !important;
   min-width: 0 !important;
   flex-shrink: 0 !important;
 }
 
 .logo-badge-wrapper {
   width: auto !important;
-  height: var(--ss-logo-height, 50px) !important;
+  height: var(--ss-logo-height, 58px) !important;
   flex-shrink: 0 !important;
   display: flex !important;
   align-items: center !important;
@@ -3838,8 +3847,8 @@ section, .section {
 .logo-badge-img {
   display: block !important;
   width: auto !important;
-  height: var(--ss-logo-height, 50px) !important;
-  max-height: var(--ss-logo-height, 50px) !important;
+  height: var(--ss-logo-height, 58px) !important;
+  max-height: var(--ss-logo-height, 58px) !important;
   max-width: 100% !important;
   object-fit: contain !important;
 }
@@ -3848,40 +3857,40 @@ section, .section {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  gap: 2px !important;
+  gap: 3px !important;
   min-width: 0 !important;
 }
 
 .brand-name {
   font-family: var(--font-heading) !important;
-  font-size: 23px !important;
+  font-size: 25.5px !important;
   font-weight: 600 !important;
-  line-height: 1.12 !important;
+  line-height: 1.1 !important;
   letter-spacing: 0.14em !important;
   white-space: nowrap !important;
 }
 
 .brand-sub {
   font-family: var(--font-body) !important;
-  font-size: 11px !important;
+  font-size: 11.5px !important;
   font-weight: 400 !important;
-  line-height: 1.3 !important;
+  line-height: 1.28 !important;
   letter-spacing: 0.22em !important;
   white-space: nowrap !important;
 }
 
 .nav-links {
-  gap: 2.25rem !important;
+  gap: 2.35rem !important;
 }
 
 .nav-links a {
-  font-size: 15px !important;
+  font-size: 15.5px !important;
   letter-spacing: 0.18em !important;
 }
 
 .btn-reserve {
-  min-height: 46px !important;
-  padding: 0 1.65rem !important;
+  min-height: 48px !important;
+  padding: 0 1.75rem !important;
   font-size: 13.5px !important;
   letter-spacing: 0.16em !important;
   display: inline-flex !important;
@@ -3890,18 +3899,90 @@ section, .section {
   flex-shrink: 0 !important;
 }
 
+.burger-btn {
+  color: var(--color-accent-gold-light, #E8C88A) !important;
+  border: 1px solid rgba(232, 200, 138, 0.55) !important;
+  background: rgba(8, 34, 28, 0.35) !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.burger-btn:hover {
+  background: rgba(232, 200, 138, 0.12) !important;
+  border-color: var(--color-accent-gold-light, #E8C88A) !important;
+}
+
+.burger-icon-svg {
+  display: block;
+  width: 22px;
+  height: 16px;
+  stroke: currentColor;
+  flex-shrink: 0;
+}
+
 /* Header-derived Top Offsets & Full-Screen Hero on Desktop */
 .hero-section {
   min-height: var(--ss-hero-min-height, 100vh) !important;
   min-height: var(--ss-hero-min-height, 100svh) !important;
-  padding-top: calc(var(--ss-header-height, 92px) + var(--ss-hero-pad-top, 3.5rem));
-  padding-bottom: var(--ss-hero-pad-bottom, 4.5rem);
+  padding-top: calc(var(--ss-header-height, 102px) + var(--ss-hero-pad-top, 3.5rem));
+  padding-bottom: calc(var(--ss-hero-pad-bottom, 4.5rem) + 1.5rem);
   display: flex;
   align-items: center;
 }
 
 .main-padding {
-  padding-top: calc(var(--ss-header-height, 92px) + 3.25rem);
+  padding-top: calc(var(--ss-header-height, 102px) + 3.25rem);
+}
+
+/* 2. Hero Bottom "Scroll to Explore" Luxury Indicator */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--color-accent-gold-light, #E8C88A);
+  opacity: 0.88;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.hero-scroll-cue:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(2px);
+}
+
+.hero-scroll-text {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light, #E8C88A);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+}
+
+.hero-scroll-line {
+  display: block;
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, var(--color-accent-gold-light, #E8C88A) 0%, rgba(232, 200, 138, 0.05) 100%);
+  animation: ssScrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes ssScrollPulse {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scaleY(0.65);
+    opacity: 0.45;
+  }
 }
 
 @media (max-width: 992px) {
@@ -3920,28 +4001,27 @@ section, .section {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 1.4rem !important;
     flex-shrink: 0 !important;
   }
 }
 
 @media (max-width: 768px) {
   html {
-    scroll-padding-top: calc(var(--ss-header-height-mobile, 74px) + 10px);
+    scroll-padding-top: calc(var(--ss-header-height-mobile, 78px) + 10px);
   }
   section, .section {
-    scroll-margin-top: calc(var(--ss-header-height-mobile, 74px) + 10px);
+    scroll-margin-top: calc(var(--ss-header-height-mobile, 78px) + 10px);
   }
 
   .header-container {
-    min-height: var(--ss-header-height-mobile, 74px) !important;
+    min-height: var(--ss-header-height-mobile, 78px) !important;
     padding: 10px var(--ss-header-gutter-mobile, 16px) !important;
-    gap: 8px !important;
+    gap: 10px !important;
     flex-wrap: nowrap !important;
   }
 
   .brand-logo {
-    gap: 9px !important;
+    gap: 10px !important;
     min-width: 0 !important;
     flex-shrink: 1 !important;
   }
@@ -3949,77 +4029,59 @@ section, .section {
   .logo-badge-wrapper,
   .logo-badge-img {
     width: auto !important;
-    height: var(--ss-logo-height-mobile, 40px) !important;
-    max-height: var(--ss-logo-height-mobile, 40px) !important;
+    height: var(--ss-logo-height-mobile, 46px) !important;
+    max-height: var(--ss-logo-height-mobile, 46px) !important;
   }
 
   .brand-name {
-    font-size: 18.5px !important;
+    font-size: 20.5px !important;
     line-height: 1.12 !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.06em !important;
   }
 
   .brand-sub {
-    font-size: 9.5px !important;
+    font-size: 10px !important;
     line-height: 1.25 !important;
-    letter-spacing: 0.11em !important;
+    letter-spacing: 0.13em !important;
   }
 
-  .btn-reserve {
-    min-height: 44px !important;
-    height: 44px !important;
-    padding: 0 12px !important;
-    font-size: 12px !important;
-    letter-spacing: 0.06em !important;
-    margin-left: auto !important;
+  /* Hide redundant top-bar phone button on mobile phones (CTA is in Hero & Hamburger Drawer) */
+  .site-header .btn-reserve {
+    display: none !important;
   }
 
   .burger-btn {
     width: 44px !important;
     height: 44px !important;
     min-height: 44px !important;
-    font-size: 1.35rem !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
   }
 
   .hero-section {
     min-height: var(--ss-hero-min-height, 100vh) !important;
     min-height: var(--ss-hero-min-height, 100svh) !important;
-    padding-top: calc(var(--ss-header-height-mobile, 74px) + 2.5rem) !important;
-    padding-bottom: 3.5rem !important;
+    padding-top: calc(var(--ss-header-height-mobile, 78px) + 2.5rem) !important;
+    padding-bottom: 4.75rem !important;
     display: flex !important;
     align-items: center !important;
   }
 
+  .hero-scroll-cue {
+    bottom: 1.15rem;
+    gap: 0.4rem;
+  }
+
+  .hero-scroll-line {
+    height: 22px;
+  }
+
   .main-padding {
-    padding-top: calc(var(--ss-header-height-mobile, 74px) + 1.5rem) !important;
+    padding-top: calc(var(--ss-header-height-mobile, 78px) + 1.5rem) !important;
   }
 
   body.admin-bar:has(#wpadminbar:not([style*="display: none"])) .main-padding {
-    padding-top: calc(var(--ss-header-height-mobile, 74px) + 1.5rem + 46px) !important;
-  }
-}
-
-/* Compact 44x44px icon CTA on phones <= 430px so 18.5px Brand Name never crowds controls */
-@media (max-width: 430px) {
-  .btn-reserve {
-    width: 44px !important;
-    height: 44px !important;
-    min-height: 44px !important;
-    padding: 0 !important;
-    border-radius: var(--ss-btn-radius, 2px) !important;
-    background-color: var(--color-accent-gold-light, #E8C88A) !important;
-    color: var(--color-bg-primary, #0D3129) !important;
-  }
-  .btn-reserve .btn-reserve-icon-svg {
-    margin: 0 !important;
-    width: 17px !important;
-    height: 17px !important;
-    fill: #0D3129 !important;
-  }
-  .btn-reserve-text-full,
-  .btn-reserve-text-short,
-  .btn-reserve-text-mini {
-    display: none !important;
+    padding-top: calc(var(--ss-header-height-mobile, 78px) + 1.5rem + 46px) !important;
   }
 }
 
@@ -4029,24 +4091,24 @@ section, .section {
     gap: 8px !important;
   }
   .brand-logo {
-    gap: 8px !important;
+    gap: 9px !important;
   }
   .logo-badge-wrapper,
   .logo-badge-img {
-    height: 38px !important;
-    max-height: 38px !important;
+    height: 42px !important;
+    max-height: 42px !important;
   }
   .brand-name {
-    font-size: 17.5px !important;
-    letter-spacing: 0.04em !important;
+    font-size: 19px !important;
+    letter-spacing: 0.05em !important;
   }
   .brand-sub {
-    font-size: 9px !important;
-    letter-spacing: 0.09em !important;
+    font-size: 9.5px !important;
+    letter-spacing: 0.11em !important;
   }
 }
 
-/* 2. Hero Section CTA Symmetry on Small Mobile */
+/* 3. Hero Section CTA Symmetry on Small Mobile */
 @media (max-width: 480px) {
   .hero-ctas {
     flex-direction: column;
@@ -4062,16 +4124,52 @@ section, .section {
   }
 }
 
-/* 3. Social Media Band — Dynamic Card Count Auto-Fit Grid */
+/* 4. Social Media Band — Dynamic Card Count Auto-Fit Grid */
 @media (min-width: 993px) {
   .social-grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
 
-/* 4. Artisanal Highlights (Zig-Zag) Container & Text Column Balance */
+/* 5. Artisanal Highlights (Zig-Zag) — Editorial Watermark Numerals & Unified Gold Offset Frame */
 .artisanal-container {
   max-width: var(--ss-container-width, 1240px);
+  counter-reset: artisanal-counter;
+}
+
+.artisanal-content {
+  position: relative;
+  z-index: 2;
+}
+
+.artisanal-content::before {
+  counter-increment: artisanal-counter;
+  content: "0" counter(artisanal-counter);
+  position: absolute;
+  top: -2.25rem;
+  left: -0.5rem;
+  font-family: var(--font-heading);
+  font-size: clamp(4.2rem, 6vw, 5.8rem);
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(232, 200, 138, 0.10);
+  pointer-events: none;
+  z-index: -1;
+  letter-spacing: 0.04em;
+}
+
+.artisanal-plate-box {
+  background: var(--color-bg-deep, #08221C) !important;
+  padding: 0.65rem !important;
+  border: 1.5px solid rgba(232, 200, 138, 0.65) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55) !important;
+}
+
+.artisanal-plate-img {
+  border-radius: 3px !important;
+  border: 1px solid rgba(232, 200, 138, 0.25) !important;
+  box-shadow: none !important;
 }
 
 @media (min-width: 769px) {
@@ -4086,12 +4184,32 @@ section, .section {
   .artisanal-container {
     padding: 0 1rem !important;
   }
+  .artisanal-content::before {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -1.85rem;
+  }
 }
 
-/* 5. Featured Dishes — 4-Column Symmetrical Desktop Grid & Centered Header on Menu Page */
-@media (min-width: 1120px) {
+/* 6. Featured Dishes — Symmetrical Centered Bottom Row on Laptop/Desktop (4 Top + 3 Centered Bottom) */
+@media (min-width: 769px) {
   .dishes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+  }
+  .dishes-grid > .dish-card {
+    flex: 0 1 calc(33.333% - 1.35rem) !important;
+    max-width: calc(33.333% - 1.35rem) !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1120px) {
+  .dishes-grid > .dish-card {
+    flex: 0 1 calc((100% - 6rem) / 4) !important;
+    max-width: calc((100% - 6rem) / 4) !important;
   }
 }
 
@@ -4105,7 +4223,7 @@ section, .section {
   margin-right: auto;
 }
 
-/* 6. Customer Reviews — Right Header Rating Badge & Dynamic Desktop Grid */
+/* 7. Customer Reviews — Right Header Rating Badge & Dynamic Desktop Grid */
 .reviews-header {
   align-items: flex-end;
 }
@@ -4165,7 +4283,7 @@ section, .section {
   }
 }
 
-/* 7. Our Story & Opening Hours Tablet/Mobile Spacing */
+/* 8. Our Story & Opening Hours Tablet/Mobile Spacing */
 main.main-padding > .about-us-section:first-child {
   border-top: none !important;
 }
@@ -4187,7 +4305,7 @@ main.main-padding > .about-us-section:first-child {
   }
 }
 
-/* 8. Menu Book Controls Width & Back Cover Vertical Centering */
+/* 9. Menu Book Controls Width & Back Cover Vertical Centering */
 .menu-book-controls-bottom {
   max-width: 680px;
   margin-left: auto;
@@ -4199,13 +4317,23 @@ main.main-padding > .about-us-section:first-child {
   gap: 0.75rem !important;
 }
 
-/* 9. Contact Us Page — Video Top Offset, Equal-Height Form Card, and Mobile Spacing */
+/* 10. Contact Us Page — Deep Emerald Video Backdrop, Top Offset, Equal-Height Form Card */
+.contact-video-section {
+  background: var(--color-bg-deep, #08221C) !important;
+}
+
 .contact-video-inner {
-  padding-top: var(--ss-header-height, 92px);
+  padding-top: var(--ss-header-height, 102px);
+}
+
+#contact-video-player {
+  background: var(--color-bg-deep, #08221C) !important;
+  border-left: 1px solid rgba(232, 200, 138, 0.35);
+  border-right: 1px solid rgba(232, 200, 138, 0.35);
 }
 
 body.admin-bar .contact-video-inner {
-  padding-top: calc(var(--ss-header-height, 92px) + 32px);
+  padding-top: calc(var(--ss-header-height, 102px) + 32px);
 }
 
 .contact-form-card-box .contact-form-card-inner,
@@ -4218,10 +4346,14 @@ body.admin-bar .contact-video-inner {
 
 @media (max-width: 768px) {
   .contact-video-inner {
-    padding-top: var(--ss-header-height-mobile, 74px) !important;
+    padding-top: var(--ss-header-height-mobile, 78px) !important;
+  }
+  #contact-video-player {
+    border-left: none !important;
+    border-right: none !important;
   }
   body.admin-bar:has(#wpadminbar:not([style*="display: none"])) .contact-video-inner {
-    padding-top: calc(var(--ss-header-height-mobile, 74px) + 46px) !important;
+    padding-top: calc(var(--ss-header-height-mobile, 78px) + 46px) !important;
   }
   .contact-top-banner {
     padding: 2rem 0 1.75rem !important;
@@ -4241,9 +4373,17 @@ body.admin-bar .contact-video-inner {
   }
 }
 
-/* 10. Footer Chef Emblem & Seamless Bottom Edge on Mobile */
+/* 11. Footer — Proportional Desktop Columns (1.45fr 0.8fr 1fr 1.25fr) & Mobile Hairline Dividers */
 .footer-logo-img {
   border-radius: 0 !important;
+}
+
+@media (min-width: 993px) {
+  .footer-grid {
+    grid-template-columns: 1.45fr 0.8fr 1fr 1.25fr !important;
+    gap: 2.5rem !important;
+    align-items: start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -4253,5 +4393,10 @@ body.admin-bar .contact-video-inner {
   .site-footer {
     padding-bottom: 4.5rem !important;
   }
+  .footer-grid > div:not(:last-child) {
+    padding-bottom: 1.35rem;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.14);
+  }
 }
+
 
