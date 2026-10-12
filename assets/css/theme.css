@@ -470,12 +470,13 @@ h1, h2, h3, h4, .section-title, .hero-title {
 
 .hero-title, .hero h1 {
   font-family: var(--font-heading);
-  font-weight: 300; /* Never bold a large Cormorant headline */
+  font-weight: 600;
   color: var(--color-text-main);
-  font-size: clamp(2.35rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.75rem, 5.2vw, 4.4rem);
   max-width: var(--ss-hero-title-maxwidth, 30ch);
-  line-height: 1.2;
-  margin-bottom: 1.25rem;
+  line-height: 1.14;
+  letter-spacing: 0.015em;
+  margin-bottom: 1.35rem;
 }
 
 .section-tag {
@@ -4108,7 +4109,21 @@ section, .section {
   }
 }
 
-/* 3. Hero Section CTA Symmetry on Small Mobile */
+/* 3. Hero Section Headline Thickness, Scale & CTA Symmetry */
+.hero-section .hero-title {
+  font-weight: 600 !important;
+  font-size: clamp(2.75rem, 5.2vw, 4.4rem) !important;
+  line-height: 1.14 !important;
+  letter-spacing: 0.015em !important;
+}
+
+@media (max-width: 768px) {
+  .hero-section .hero-title {
+    font-size: clamp(2.45rem, 8.8vw, 3.1rem) !important;
+    line-height: 1.15 !important;
+  }
+}
+
 @media (max-width: 480px) {
   .hero-ctas {
     flex-direction: column;
@@ -4131,7 +4146,7 @@ section, .section {
   }
 }
 
-/* 5. Artisanal Highlights (Zig-Zag) — Editorial Watermark Numerals & Unified Gold Offset Frame */
+/* 5. Artisanal Highlights (Zig-Zag) — Editorial Watermark Numerals & Soft-Rounded Soft Gold Rim */
 .artisanal-container {
   max-width: var(--ss-container-width, 1240px);
   counter-reset: artisanal-counter;
@@ -4161,14 +4176,14 @@ section, .section {
 .artisanal-plate-box {
   background: var(--color-bg-deep, #08221C) !important;
   padding: 0.65rem !important;
-  border: 1.5px solid rgba(232, 200, 138, 0.65) !important;
-  border-radius: 6px !important;
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55) !important;
+  border: 1.5px solid rgba(232, 200, 138, 0.45) !important;
+  border-radius: 28px !important;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(232, 200, 138, 0.08) !important;
 }
 
 .artisanal-plate-img {
-  border-radius: 3px !important;
-  border: 1px solid rgba(232, 200, 138, 0.25) !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(232, 200, 138, 0.22) !important;
   box-shadow: none !important;
 }
 
