@@ -128,33 +128,32 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. UNIFIED ROYAL CHEF CREST PRELOADER ENGINE (Synchronized 850ms Hold + 460ms Silk Dissolve)
+// 1. ROYAL SPLIT-DOOR CURTAIN & GOLD HAIRLINE PRELOADER ENGINE (Consistent 720ms Hold Across All Pages)
 function initPreloader() {
   const loader = document.getElementById('preloader');
   if (!loader) return;
 
   let dismissed = false;
-  const dismissPreloader = () => {
+  const openRoyalDoors = () => {
     if (dismissed) return;
     dismissed = true;
+    loader.classList.remove('closing');
     loader.classList.add('hidden');
-    setTimeout(() => {
-      if (loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 480);
   };
 
-  if (document.readyState === 'complete') {
-    setTimeout(dismissPreloader, 850);
-  } else {
-    window.addEventListener('load', () => setTimeout(dismissPreloader, 750));
-  }
-  setTimeout(dismissPreloader, 1500);
+  const elapsed = (typeof performance !== 'undefined' && performance.now) ? performance.now() : 0;
+  const remaining = Math.max(480, 740 - Math.min(elapsed, 260));
+  setTimeout(openRoyalDoors, remaining);
 }
 
-// 2. UNIFIED SILK PAGE-TO-PAGE TRANSITION ENGINE (Zero clip-path stutter, bfcache-safe)
+// 2. ROYAL SPLIT-DOOR PAGE-TO-PAGE TRANSITION ENGINE (Zero Blink, Zero Header Jump, bfcache-safe)
 function initPageTransitions() {
   window.addEventListener('pageshow', () => {
-    document.body.classList.remove('ss-page-leaving');
+    const loader = document.getElementById('preloader');
+    if (loader && loader.classList.contains('closing')) {
+      loader.classList.remove('closing');
+      loader.classList.add('hidden');
+    }
   });
 
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -173,10 +172,16 @@ function initPageTransitions() {
       return;
     }
 
-    document.body.classList.add('ss-page-leaving');
-    setTimeout(() => {
+    const loader = document.getElementById('preloader');
+    if (loader) {
+      loader.classList.remove('hidden');
+      loader.classList.add('closing');
+      setTimeout(() => {
+        window.location.href = href;
+      }, 330);
+    } else {
       window.location.href = href;
-    }, 200);
+    }
   });
 }
 
@@ -531,20 +536,19 @@ function initReviewsSlider() {
   window.addEventListener('resize', updateUI);
 }
 
-// 6. Unified Whole-Row Silk Editorial Scroll Glide (Self-Cleaning for Zero Hover Conflict)
+// 6. Unified Silk Editorial Scroll Glide (Zero Mobile Blank Gap & Zero Layer-Drop Flicker)
 function initCinemaScrollReveal() {
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (isReduced || !('IntersectionObserver' in window)) return;
 
   const revealTargets = [];
 
-  // Target ONLY whole section blocks and rows — never individual cards or plates
   document.querySelectorAll(
-    '.artisanal-header, .artisanal-row, .social-band-header, .social-grid, .reviews-header, .reviews-grid, #reviews-slider, .about-story-grid, .dishes-section .section-header-flex, .dishes-grid, .contact-cards-grid, .contact-map-box, .footer-grid'
+    '.artisanal-header, .artisanal-row, .social-band-header, .social-card, .reviews-header, .review-card, .about-story-grid, .dishes-section .section-header-flex, .dish-card, .contact-card-box, .contact-map-box, .footer-grid'
   ).forEach((el) => {
     const rect = el.getBoundingClientRect();
-    // Only add .ss-reveal to blocks below the initial viewport so above-the-fold never flashes
-    if (rect.top >= window.innerHeight * 0.9) {
+    // Only add .ss-reveal to elements below the initial viewport so above-the-fold never flashes
+    if (rect.top >= window.innerHeight * 0.92) {
       el.classList.add('ss-reveal');
       revealTargets.push(el);
     }
@@ -552,26 +556,18 @@ function initCinemaScrollReveal() {
 
   if (!revealTargets.length) return;
 
-  const revealAndClean = (el) => {
-    el.classList.add('is-visible');
-    // Self-clean classes after 580ms so transforms/will-change never interfere with card hovers
-    setTimeout(() => {
-      el.classList.remove('ss-reveal', 'is-visible');
-    }, 580);
-  };
-
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           obs.unobserve(entry.target);
-          revealAndClean(entry.target);
+          entry.target.classList.add('is-visible');
         }
       });
     },
     {
-      threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
+      threshold: 0.02,
+      rootMargin: '0px 0px -15px 0px'
     }
   );
 
