@@ -4109,12 +4109,19 @@ section, .section {
   }
 }
 
-/* 3. Hero Section Headline Thickness, Scale & CTA Symmetry */
+/* 3. Hero Section Headline Thickness, Scale, Gold Italic Accent & CTA Symmetry */
 .hero-section .hero-title {
   font-weight: 600 !important;
   font-size: clamp(2.75rem, 5.2vw, 4.4rem) !important;
   line-height: 1.14 !important;
   letter-spacing: 0.015em !important;
+}
+
+.hero-section .hero-title em,
+.hero-section .hero-title .hero-title-accent {
+  font-style: italic;
+  color: var(--color-accent-gold-light, #E8C88A);
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
@@ -4146,7 +4153,7 @@ section, .section {
   }
 }
 
-/* 5. Artisanal Highlights (Zig-Zag) — Editorial Watermark Numerals & Soft-Rounded Soft Gold Rim */
+/* 5. Artisanal Highlights (Zig-Zag) — Editorial Watermark Numerals, Soft-Rounded Soft Gold Rim & Hover Glide */
 .artisanal-container {
   max-width: var(--ss-container-width, 1240px);
   counter-reset: artisanal-counter;
@@ -4179,12 +4186,24 @@ section, .section {
   border: 1.5px solid rgba(232, 200, 138, 0.45) !important;
   border-radius: 28px !important;
   box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(232, 200, 138, 0.08) !important;
+  overflow: hidden !important;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.artisanal-plate-box:hover {
+  border-color: rgba(232, 200, 138, 0.78) !important;
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.65), 0 0 32px rgba(232, 200, 138, 0.14) !important;
 }
 
 .artisanal-plate-img {
   border-radius: 22px !important;
   border: 1px solid rgba(232, 200, 138, 0.22) !important;
   box-shadow: none !important;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.artisanal-plate-box:hover .artisanal-plate-img {
+  transform: scale(1.035) !important;
 }
 
 @media (min-width: 769px) {
@@ -4238,7 +4257,7 @@ section, .section {
   margin-right: auto;
 }
 
-/* 7. Customer Reviews — Right Header Rating Badge & Dynamic Desktop Grid */
+/* 7. Customer Reviews — Right Header Rating Badge, Quotation Watermark & Equal-Height Author Divider */
 .reviews-header {
   align-items: flex-end;
 }
@@ -4280,6 +4299,39 @@ section, .section {
   margin-bottom: 0 !important;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
+}
+
+.review-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-card::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.15rem;
+  right: 1.15rem;
+  font-family: var(--font-heading);
+  font-size: 5.5rem;
+  line-height: 1;
+  color: rgba(232, 200, 138, 0.12);
+  pointer-events: none;
+}
+
+.review-card .review-text {
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.review-card .review-meta {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(232, 200, 138, 0.22);
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 769px) {
