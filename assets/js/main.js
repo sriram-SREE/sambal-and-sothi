@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollHeader();
   initNativeBookViewer();
   initReviewsSlider();
+  initCinemaScrollReveal();
+  initDishLightbox();
+  initLiveOpenStatus();
 });
 
 function initScrollHeader() {
@@ -125,13 +128,40 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. UNIFIED 4-PAGE SEAMLESS EMBLEM ZOOM & LOCK-IN PRELOADER ENGINE
+// 1. UNIFIED 4-PAGE SEAMLESS EMBLEM ZOOM & LOCK-IN PRELOADER ENGINE (Once Per Session)
 function initPreloader() {
   const loader = document.getElementById('preloader');
   const chefContainer = document.querySelector('.preloader-chef-container');
-  if (!loader || !chefContainer) return;
+  if (!loader) return;
 
+  let alreadyShown = false;
+  try {
+    alreadyShown = sessionStorage.getItem('ss_preloader_shown') === '1';
+  } catch (e) {}
+
+  // If the user has already seen the Chef Emblem entrance this session, skip instantly
+  if (alreadyShown) {
+    loader.style.transition = 'opacity 0.22s ease, visibility 0.22s ease';
+    loader.classList.add('hidden');
+    setTimeout(() => {
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 240);
+    return;
+  }
+
+  try {
+    sessionStorage.setItem('ss_preloader_shown', '1');
+  } catch (e) {}
+
+  if (!chefContainer) {
+    loader.classList.add('hidden');
+    return;
+  }
+
+  let locked = false;
   const performLockIn = () => {
+    if (locked) return;
+    locked = true;
     chefContainer.classList.add('lock-to-header');
     setTimeout(() => {
       loader.classList.add('hidden');
@@ -215,6 +245,16 @@ function initMobileNav() {
   }
   if (closeBtn && drawer) {
     closeBtn.addEventListener('click', () => drawer.classList.remove('active'));
+  }
+  if (drawer) {
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => drawer.classList.remove('active'));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('active')) {
+        drawer.classList.remove('active');
+      }
+    });
   }
 }
 
@@ -544,3 +584,264 @@ function initReviewsSlider() {
   updateUI();
   window.addEventListener('resize', updateUI);
 }
+
+// 6. Cinema-Style Scroll Entrance Choreography (IntersectionObserver)
+function initCinemaScrollReveal() {
+  const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isReduced || !('IntersectionObserver' in window)) return;
+
+  const revealTargets = [];
+
+  // Circular Zig-Zag Plates (Scale + Glide)
+  document.querySelectorAll('.artisanal-plate-box, .zig-zag-image-col').forEach((el) => {
+    el.classList.add('ss-reveal-plate');
+    revealTargets.push(el);
+  });
+
+  // Zig-Zag Copy Columns
+  document.querySelectorAll('.artisanal-content, .zig-zag-content-col').forEach((el) => {
+    el.classList.add('ss-reveal', 'ss-delay-1');
+    revealTargets.push(el);
+  });
+
+  // Section Headers, Story Frame & Content, Contact Cards & Map
+  document.querySelectorAll(
+    '.artisanal-header, .social-band-header, .section-header, .section-header-flex, .reviews-header-row, #reviews-slider, .story-luxury-frame, .about-story-grid > div:first-child, .about-story-content, .contact-card-box, .contact-map-box, .Menu-header-banner'
+  ).forEach((el) => {
+    if (!el.classList.contains('ss-reveal')) {
+      el.classList.add('ss-reveal');
+      revealTargets.push(el);
+    }
+  });
+
+  // Staggered Grids: Featured Dishes, Reviews Grid Cards, Social Cards, Footer Columns
+  const staggerGroups = [
+    '.dishes-grid .dish-card',
+    '.reviews-grid .review-card',
+    '.social-grid .social-card',
+    '.footer-grid > div',
+    '.footer-grid .footer-col'
+  ];
+
+  staggerGroups.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((el, idx) => {
+      if (!el.classList.contains('ss-reveal')) {
+        el.classList.add('ss-reveal');
+        const delayIdx = (idx % 4) + 1;
+        el.classList.add(`ss-delay-${delayIdx}`);
+        revealTargets.push(el);
+      }
+    });
+  });
+
+  if (!revealTargets.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: '0px 0px -36px 0px'
+    }
+  );
+
+  revealTargets.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92) {
+      el.classList.add('is-visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+// 7. Interactive HD Dish Lightbox Modal on Featured Dish Cards
+function initDishLightbox() {
+  const dishCards = document.querySelectorAll('.dish-card.has-dish-image');
+  if (!dishCards.length) return;
+
+  let lightbox = document.getElementById('ss-dish-lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'ss-dish-lightbox';
+    lightbox.className = 'ss-lightbox-overlay ss-dish-lightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-label', 'Signature Dish Preview');
+
+    lightbox.innerHTML = `
+      <div class="ss-lightbox-modal">
+        <span class="corner-flourish tl" aria-hidden="true"></span>
+        <span class="corner-flourish tr" aria-hidden="true"></span>
+        <span class="corner-flourish bl" aria-hidden="true"></span>
+        <span class="corner-flourish br" aria-hidden="true"></span>
+        <button type="button" class="ss-lightbox-close" aria-label="Close dish preview">&times;</button>
+        <div class="ss-lightbox-img-wrap">
+          <img src="" alt="" class="ss-lightbox-img" id="ss-lightbox-img">
+        </div>
+        <div class="ss-lightbox-header">
+          <div>
+            <span class="ss-lightbox-cat" id="ss-lightbox-tag">CHEF'S SIGNATURE SELECTION</span>
+            <h3 class="ss-lightbox-title" id="ss-lightbox-title"></h3>
+          </div>
+          <div class="dish-price-tag" id="ss-lightbox-price"></div>
+        </div>
+        <div class="ss-lightbox-tags" id="ss-lightbox-badges"></div>
+        <div class="ss-lightbox-actions">
+          <a href="tel:+6583983865" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 0.8rem;">&#9990; Call to Order / Reserve</a>
+          <button type="button" class="btn-secondary ss-lightbox-dismiss" style="padding: 0.75rem 1.5rem; font-size: 0.8rem; cursor: pointer;">Close Preview</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+  }
+
+  const imgEl = document.getElementById('ss-lightbox-img');
+  const tagEl = document.getElementById('ss-lightbox-tag');
+  const titleEl = document.getElementById('ss-lightbox-title');
+  const priceEl = document.getElementById('ss-lightbox-price');
+  const badgesEl = document.getElementById('ss-lightbox-badges');
+  const closeBtn = lightbox.querySelector('.ss-lightbox-close');
+  const dismissBtn = lightbox.querySelector('.ss-lightbox-dismiss');
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  const openLightbox = (card) => {
+    const cardImg = card.querySelector('img.dish-card-img, .dish-card-img-box img, .dish-card-img img');
+    const cardCat = card.querySelector('.dish-category');
+    const cardTitle = card.querySelector('.dish-title, .dish-name');
+    const cardPrice = card.querySelector('.dish-price-tag, .dish-price');
+    const cardBadges = card.querySelector('.dish-tags-list');
+
+    if (cardImg && imgEl) {
+      imgEl.src = cardImg.getAttribute('src') || '';
+      imgEl.alt = cardImg.getAttribute('alt') || (cardTitle ? cardTitle.textContent.trim() : 'Signature Dish');
+    }
+    if (tagEl) {
+      tagEl.textContent = cardCat ? cardCat.textContent.trim().toUpperCase() : "CHEF'S SIGNATURE SELECTION";
+    }
+    if (titleEl && cardTitle) titleEl.textContent = cardTitle.textContent.trim();
+    if (priceEl && cardPrice) priceEl.textContent = cardPrice.textContent.trim();
+    if (badgesEl) {
+      badgesEl.innerHTML = cardBadges ? cardBadges.innerHTML : '';
+    }
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  dishCards.forEach((card) => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    const dishTitle = card.querySelector('.dish-title, .dish-name');
+    if (dishTitle) {
+      card.setAttribute('aria-label', `Inspect ${dishTitle.textContent.trim()} in high definition`);
+    }
+    card.addEventListener('click', (e) => {
+      if (e.target && e.target.closest('a, button')) return;
+      openLightbox(card);
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(card);
+      }
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (dismissBtn) dismissBtn.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+}
+
+// 8. Live Singapore Time (SGT / UTC+8) "OPEN NOW" Status Indicator
+function initLiveOpenStatus() {
+  try {
+    const now = new Date();
+    let sgtHours = 12;
+    let sgtMinutes = 0;
+
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Singapore',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+      }).formatToParts(now);
+
+      parts.forEach((p) => {
+        if (p.type === 'hour') sgtHours = parseInt(p.value, 10) % 24;
+        if (p.type === 'minute') sgtMinutes = parseInt(p.value, 10);
+      });
+    } catch (err) {
+      const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+      const sgtDate = new Date(utcMs + 8 * 3600000);
+      sgtHours = sgtDate.getHours();
+      sgtMinutes = sgtDate.getMinutes();
+    }
+
+    const totalMinutes = sgtHours * 60 + sgtMinutes;
+    // Daily operating hours: 9:00 AM (540m) to 10:30 PM (1350m) SGT
+    const isOpen = totalMinutes >= 540 && totalMinutes < 1350;
+
+    const createBadge = () => {
+      const badge = document.createElement('span');
+      badge.className = `ss-live-status-badge ${isOpen ? 'is-open' : 'is-closed'}`;
+      badge.innerHTML = `<span class="ss-status-dot" aria-hidden="true"></span><span>${
+        isOpen ? 'OPEN NOW · SGT' : 'CLOSED · OPENS 9:00 AM SGT'
+      }</span>`;
+      return badge;
+    };
+
+    // 1. Inject into Contact Page "TIMINGS & OPENING HOURS" item
+    document.querySelectorAll('.contact-info-item').forEach((item) => {
+      const label = item.querySelector('.contact-info-label');
+      if (label && /opening hours|timings/i.test(label.textContent) && !item.querySelector('.ss-live-status-badge')) {
+        const wrap = document.createElement('div');
+        wrap.style.marginTop = '10px';
+        wrap.appendChild(createBadge());
+        item.appendChild(wrap);
+      }
+    });
+
+    // 2. Inject into Footer column with "Open Daily:"
+    document.querySelectorAll('.footer-grid > div, .footer-col').forEach((col) => {
+      if (/open daily|operating hours/i.test(col.textContent) && !col.querySelector('.ss-live-status-badge')) {
+        const wrap = document.createElement('div');
+        wrap.style.marginTop = '10px';
+        wrap.appendChild(createBadge());
+        col.appendChild(wrap);
+      }
+    });
+
+    // 3. Inject into Concierge Mobile Drawer footer
+    const mobFooter = document.querySelector('.mobile-nav-footer');
+    if (mobFooter && !mobFooter.querySelector('.ss-live-status-badge')) {
+      const wrap = document.createElement('div');
+      wrap.style.marginTop = '6px';
+      wrap.style.display = 'flex';
+      wrap.style.justifyContent = 'center';
+      wrap.appendChild(createBadge());
+      mobFooter.appendChild(wrap);
+    }
+  } catch (e) {}
+}
+

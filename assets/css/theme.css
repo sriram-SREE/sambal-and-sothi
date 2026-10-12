@@ -4512,4 +4512,560 @@ body.admin-bar .contact-video-inner {
   }
 }
 
+/* ==========================================================================
+   FINAL 6 COMPLEMENTARY LUXURY SYSTEMS (100% COHESION ACROSS PC & MOBILE)
+   ========================================================================== */
+
+/* 1. Cinema-Style Scroll-Reveal Entrance Choreography & Preloader Lock-In */
+.preloader-chef-container.lock-to-header {
+  transform: translate(-50%, -62%) scale(0.78) !important;
+  opacity: 0 !important;
+}
+
+.ss-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1), transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.ss-reveal.ss-reveal-plate {
+  transform: translateY(24px) scale(0.94);
+  transition: opacity 0.82s cubic-bezier(0.22, 1, 0.36, 1), transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-reveal.is-visible,
+.ss-reveal.ss-reveal-plate.is-visible {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-reveal,
+  .ss-reveal.ss-reveal-plate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* 2. Gold-Leaf Metallic Calligraphy on the 3 Zig-Zag Script Titles (PC & Mobile) */
+.artisanal-script-title {
+  background: linear-gradient(135deg, #FFF6D6 0%, #F4D898 38%, #E8C88A 68%, #C9A227 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: var(--color-accent-gold-light, #E8C88A) !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.65));
+  padding-bottom: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .artisanal-script-title {
+    background: linear-gradient(135deg, #FFF6D6 0%, #F4D898 38%, #E8C88A 68%, #C9A227 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: var(--color-accent-gold-light, #E8C88A) !important;
+    text-shadow: none !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
+  }
+}
+
+/* 3. Brushed Champagne-Gold Shimmer on Primary Buttons & Unified Card Top-Edge Sweep */
+.btn-primary,
+.btn-reserve,
+.book-turn-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F5DFA3 0%, #E8C88A 52%, #D4AC53 100%) !important;
+  color: #08221C !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.25s ease, filter 0.25s ease !important;
+}
+
+.btn-primary::before,
+.btn-reserve::before,
+.book-turn-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+  transform: skewX(-22deg);
+  transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.btn-primary:hover::before,
+.btn-reserve:hover::before,
+.book-turn-btn:hover::before {
+  left: 135%;
+}
+
+.btn-primary:hover,
+.btn-reserve:hover,
+.book-turn-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 18px rgba(232, 200, 138, 0.22) !important;
+}
+
+.review-card,
+.dish-card,
+.contact-card-box {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.28s ease, box-shadow 0.28s ease !important;
+}
+
+.review-card::after,
+.dish-card::after,
+.contact-card-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-gold-light, #E8C88A), transparent);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.review-card:hover,
+.dish-card:hover,
+.contact-card-box:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--color-accent-gold-light, #E8C88A) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.48), 0 0 20px rgba(232, 200, 138, 0.08) !important;
+}
+
+.review-card:hover::after,
+.dish-card:hover::after,
+.contact-card-box:hover::after {
+  opacity: 1;
+}
+
+/* 4. Architectural Frame Harmony (Diamond Dividers, Corner Flourishes & Alternating Emerald Depth) */
+.about-us-section {
+  background: radial-gradient(ellipse at 50% 35%, #13463A 0%, #0D3129 58%, #08221C 100%) !important;
+  position: relative;
+}
+
+.stats-band,
+.artisanal-highlights-section,
+.reviews-section,
+.about-us-section {
+  position: relative;
+}
+
+.stats-band::after,
+.artisanal-highlights-section::after,
+.reviews-section::after {
+  content: "❖";
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #08221C;
+  border: 1px solid rgba(232, 200, 138, 0.42);
+  color: var(--color-accent-gold-light, #E8C88A);
+  font-size: 0.68rem;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+.story-luxury-frame {
+  outline: 1px solid rgba(232, 200, 138, 0.38);
+  outline-offset: -8px;
+}
+
+.story-luxury-frame .corner-flourish,
+.contact-map-box .corner-flourish {
+  z-index: 5;
+}
+
+.contact-map-box {
+  outline: 1px solid rgba(232, 200, 138, 0.42);
+  outline-offset: -8px;
+}
+
+.contact-demo-form input:focus,
+.contact-demo-form textarea:focus,
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus {
+  outline: none !important;
+  border-color: var(--color-accent-gold-light, #E8C88A) !important;
+  box-shadow: 0 0 0 3px rgba(232, 200, 138, 0.16) !important;
+}
+
+/* 5. 3D Stacked Gold-Edge Paper on Menu Book & Interactive HD Dish Lightbox Modal */
+@media (min-width: 769px) {
+  .native-book-wrapper {
+    box-shadow:
+      3px 2px 0 #123D33,
+      4px 2px 0 rgba(232, 200, 138, 0.58),
+      7px 4px 0 #0D3129,
+      8px 4px 0 rgba(232, 200, 138, 0.44),
+      11px 6px 0 #08221C,
+      12px 6px 0 rgba(232, 200, 138, 0.32),
+      0 26px 60px rgba(0, 0, 0, 0.85),
+      0 0 28px rgba(232, 200, 138, 0.15),
+      -12px 18px 35px rgba(0, 0, 0, 0.6) !important;
+  }
+}
+
+.dish-card.has-dish-image {
+  cursor: pointer;
+}
+
+.dish-card.has-dish-image .dish-card-img-box::after {
+  content: "View Close-Up \2197";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(8, 34, 28, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(232, 200, 138, 0.65);
+  color: var(--color-accent-gold-light, #E8C88A);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dish-card.has-dish-image:hover .dish-card-img-box::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ss-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  background: rgba(5, 20, 16, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.ss-lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ss-lightbox-modal {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background: radial-gradient(ellipse at center, #124237 0%, #08221C 100%);
+  border: 2px solid var(--color-accent-gold-light, #E8C88A);
+  outline: 1px solid rgba(232, 200, 138, 0.38);
+  outline-offset: -8px;
+  padding: 1.5rem;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.85), 0 0 36px rgba(232, 200, 138, 0.15);
+  transform: translateY(16px) scale(0.97);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-lightbox-overlay.active .ss-lightbox-modal {
+  transform: translateY(0) scale(1);
+}
+
+.ss-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(8, 34, 28, 0.9);
+  border: 1px solid rgba(232, 200, 138, 0.65);
+  color: var(--color-accent-gold-light, #E8C88A);
+  font-size: 1.35rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ss-lightbox-close:hover {
+  background: var(--color-brand-emerald, #17564A);
+  transform: scale(1.06);
+}
+
+.ss-lightbox-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(232, 200, 138, 0.35);
+  margin-bottom: 1.25rem;
+  background: #061A15;
+}
+
+.ss-lightbox-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ss-lightbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.ss-lightbox-cat {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light, #E8C88A);
+  margin-bottom: 0.2rem;
+}
+
+.ss-lightbox-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text-main, #F3EDE3);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.ss-lightbox-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(232, 200, 138, 0.16);
+}
+
+.ss-lightbox-actions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.ss-lightbox-actions .btn-primary,
+.ss-lightbox-actions .btn-secondary {
+  flex: 1 1 auto;
+  text-align: center;
+  justify-content: center;
+}
+
+/* 6. 5-Star Concierge Mobile Hamburger Drawer (#mobile-nav) & Live SGT Status Badge */
+.mobile-nav {
+  background: radial-gradient(ellipse at center, #124237 0%, #08221C 75%, #051612 100%) !important;
+  padding: 1.15rem !important;
+  z-index: 9998 !important;
+}
+
+.mobile-nav-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 440px;
+  border: 1.5px solid rgba(232, 200, 138, 0.55);
+  outline: 1px dashed rgba(232, 200, 138, 0.28);
+  outline-offset: -8px;
+  padding: 2.25rem 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.65);
+}
+
+.mobile-nav-close {
+  top: 0.85rem !important;
+  right: 1.1rem !important;
+  color: var(--color-accent-gold-light, #E8C88A) !important;
+  font-size: 2.25rem !important;
+  line-height: 1 !important;
+}
+
+.mobile-nav-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.mobile-nav-logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  margin-bottom: 0.25rem;
+}
+
+.mobile-nav-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-main, #F3EDE3);
+  line-height: 1.15;
+}
+
+.mobile-nav-brand-sub {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light, #E8C88A);
+}
+
+.mobile-nav-links-group {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0.5rem 0;
+}
+
+.mobile-nav-links-group a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 0.5rem;
+  border-bottom: 1px solid rgba(232, 200, 138, 0.18);
+  font-family: var(--font-heading) !important;
+  font-size: 1.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--color-text-main, #F3EDE3);
+}
+
+.mobile-nav-links-group a:first-child {
+  border-top: 1px solid rgba(232, 200, 138, 0.18);
+}
+
+.mobile-nav-num {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: rgba(232, 200, 138, 0.65);
+}
+
+.mobile-nav-cta {
+  width: 100%;
+  max-width: 280px;
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  padding: 0.9rem 1.5rem !important;
+}
+
+.mobile-nav-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(232, 200, 138, 0.18);
+  width: 100%;
+}
+
+.mobile-nav-address {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #BDAF99);
+}
+
+.mobile-nav-hours {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light, #E8C88A);
+}
+
+/* Live Singapore Time (SGT) Open Status Pill */
+.ss-live-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  padding: 0.28rem 0.75rem;
+  background: rgba(8, 34, 28, 0.85);
+  border: 1px solid rgba(232, 200, 138, 0.45);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent-gold-light, #E8C88A);
+  width: fit-content;
+}
+
+.ss-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4CD964;
+  box-shadow: 0 0 8px #4CD964;
+  animation: ssDotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.ss-live-status-badge.is-closed .ss-status-dot {
+  background: #E8C88A;
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes ssDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.85); }
+}
+
+
 
