@@ -128,10 +128,9 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. UNIFIED 4-PAGE SEAMLESS EMBLEM ZOOM & LOCK-IN PRELOADER ENGINE (Once Per Session)
+// 1. UNIFIED SILK PRELOADER ENGINE (Once Per Session, Smooth Dissolve — No Upward Jump)
 function initPreloader() {
   const loader = document.getElementById('preloader');
-  const chefContainer = document.querySelector('.preloader-chef-container');
   if (!loader) return;
 
   let alreadyShown = false;
@@ -139,13 +138,10 @@ function initPreloader() {
     alreadyShown = sessionStorage.getItem('ss_preloader_shown') === '1';
   } catch (e) {}
 
-  // If the user has already seen the Chef Emblem entrance this session, skip instantly
   if (alreadyShown) {
-    loader.style.transition = 'opacity 0.22s ease, visibility 0.22s ease';
+    document.documentElement.classList.add('ss-visited');
     loader.classList.add('hidden');
-    setTimeout(() => {
-      if (loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 240);
+    if (loader.parentNode) loader.parentNode.removeChild(loader);
     return;
   }
 
@@ -153,37 +149,30 @@ function initPreloader() {
     sessionStorage.setItem('ss_preloader_shown', '1');
   } catch (e) {}
 
-  if (!chefContainer) {
+  let dismissed = false;
+  const dismissPreloader = () => {
+    if (dismissed) return;
+    dismissed = true;
     loader.classList.add('hidden');
-    return;
-  }
-
-  let locked = false;
-  const performLockIn = () => {
-    if (locked) return;
-    locked = true;
-    chefContainer.classList.add('lock-to-header');
     setTimeout(() => {
-      loader.classList.add('hidden');
-      setTimeout(() => {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 600);
-    }, 380);
+      document.documentElement.classList.add('ss-visited');
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 500);
   };
 
   if (document.readyState === 'complete') {
-    setTimeout(performLockIn, 550);
+    setTimeout(dismissPreloader, 650);
   } else {
-    window.addEventListener('load', () => setTimeout(performLockIn, 550));
+    window.addEventListener('load', () => setTimeout(dismissPreloader, 650));
   }
-  setTimeout(performLockIn, 1600);
+  setTimeout(dismissPreloader, 1400);
 }
 
-// 2. UNIFIED SEAMLESS PAGE-TO-PAGE TRANSITION ENGINE
+// 2. UNIFIED SILK PAGE-TO-PAGE TRANSITION ENGINE (Zero clip-path stutter, bfcache-safe)
 function initPageTransitions() {
-  const iris = document.getElementById('iris-curtain');
-  const ring = document.getElementById('ring-curtain');
-  if (!iris || !ring) return;
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('ss-page-leaving');
+  });
 
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -201,36 +190,10 @@ function initPageTransitions() {
       return;
     }
 
-    const x = e.clientX || window.innerWidth / 2;
-    const y = e.clientY || window.innerHeight / 2;
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const radius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y)) * 1.08;
-
-    iris.style.transition = 'none';
-    iris.style.clipPath = `circle(0px at ${x}px ${y}px)`;
-    iris.style.opacity = '1';
-
-    ring.style.transition = 'none';
-    ring.style.left = `${x}px`;
-    ring.style.top = `${y}px`;
-    ring.style.width = '0px';
-    ring.style.height = '0px';
-    ring.style.opacity = '0.95';
-
-    requestAnimationFrame(() => {
-      iris.style.transition = 'clip-path 520ms cubic-bezier(0.65, 0, 0.35, 1)';
-      iris.style.clipPath = `circle(${radius}px at ${x}px ${y}px)`;
-
-      ring.style.transition = 'width 520ms cubic-bezier(0.65, 0, 0.35, 1), height 520ms cubic-bezier(0.65, 0, 0.35, 1), opacity 520ms ease-out';
-      ring.style.width = `${radius * 2.1}px`;
-      ring.style.height = `${radius * 2.1}px`;
-      ring.style.opacity = '0';
-    });
-
+    document.body.classList.add('ss-page-leaving');
     setTimeout(() => {
       window.location.href = href;
-    }, 520);
+    }, 200);
   });
 }
 
@@ -285,7 +248,7 @@ function initNativeBookViewer() {
     const toPage = pages[currentPage - 1];
 
     if (currentPage > prevPageNum) {
-      // Flipping forward: fromPage folds left (-180deg), revealing toPage underneath
+      // Flipping forward: fromPage folds left (-95deg + smooth fade), revealing toPage underneath
       isFlipping = true;
 
       toPage.classList.remove('flipped', 'flipping-forward', 'flipping-backward', 'flip-in');
@@ -308,10 +271,10 @@ function initNativeBookViewer() {
         toPage.classList.add('active');
         isFlipping = false;
         refreshUI();
-      }, 650);
+      }, 500);
 
     } else if (currentPage < prevPageNum) {
-      // Flipping backward: toPage turns in from left (-180deg) to 0deg
+      // Flipping backward: toPage turns in from left (-95deg) to 0deg
       isFlipping = true;
 
       for (let i = currentPage; i < totalPages; i++) {
@@ -333,7 +296,7 @@ function initNativeBookViewer() {
         fromPage.classList.remove('active');
         isFlipping = false;
         refreshUI();
-      }, 650);
+      }, 500);
 
     } else {
       // Initial state
@@ -585,80 +548,51 @@ function initReviewsSlider() {
   window.addEventListener('resize', updateUI);
 }
 
-// 6. Cinema-Style Scroll Entrance Choreography (IntersectionObserver)
+// 6. Unified Whole-Row Silk Editorial Scroll Glide (Self-Cleaning for Zero Hover Conflict)
 function initCinemaScrollReveal() {
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (isReduced || !('IntersectionObserver' in window)) return;
 
   const revealTargets = [];
 
-  // Circular Zig-Zag Plates (Scale + Glide)
-  document.querySelectorAll('.artisanal-plate-box, .zig-zag-image-col').forEach((el) => {
-    el.classList.add('ss-reveal-plate');
-    revealTargets.push(el);
-  });
-
-  // Zig-Zag Copy Columns
-  document.querySelectorAll('.artisanal-content, .zig-zag-content-col').forEach((el) => {
-    el.classList.add('ss-reveal', 'ss-delay-1');
-    revealTargets.push(el);
-  });
-
-  // Section Headers, Story Frame & Content, Contact Cards & Map
+  // Target ONLY whole section blocks and rows — never individual cards or plates
   document.querySelectorAll(
-    '.artisanal-header, .social-band-header, .section-header, .section-header-flex, .reviews-header-row, #reviews-slider, .story-luxury-frame, .about-story-grid > div:first-child, .about-story-content, .contact-card-box, .contact-map-box, .Menu-header-banner'
+    '.artisanal-header, .artisanal-row, .social-band-header, .social-grid, .reviews-header, .reviews-grid, #reviews-slider, .about-story-grid, .dishes-section .section-header-flex, .dishes-grid, .contact-cards-grid, .contact-map-box, .footer-grid'
   ).forEach((el) => {
-    if (!el.classList.contains('ss-reveal')) {
+    const rect = el.getBoundingClientRect();
+    // Only add .ss-reveal to blocks below the initial viewport so above-the-fold never flashes
+    if (rect.top >= window.innerHeight * 0.9) {
       el.classList.add('ss-reveal');
       revealTargets.push(el);
     }
   });
 
-  // Staggered Grids: Featured Dishes, Reviews Grid Cards, Social Cards, Footer Columns
-  const staggerGroups = [
-    '.dishes-grid .dish-card',
-    '.reviews-grid .review-card',
-    '.social-grid .social-card',
-    '.footer-grid > div',
-    '.footer-grid .footer-col'
-  ];
-
-  staggerGroups.forEach((selector) => {
-    document.querySelectorAll(selector).forEach((el, idx) => {
-      if (!el.classList.contains('ss-reveal')) {
-        el.classList.add('ss-reveal');
-        const delayIdx = (idx % 4) + 1;
-        el.classList.add(`ss-delay-${delayIdx}`);
-        revealTargets.push(el);
-      }
-    });
-  });
-
   if (!revealTargets.length) return;
+
+  const revealAndClean = (el) => {
+    el.classList.add('is-visible');
+    // Self-clean classes after 580ms so transforms/will-change never interfere with card hovers
+    setTimeout(() => {
+      el.classList.remove('ss-reveal', 'is-visible');
+    }, 580);
+  };
 
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
           obs.unobserve(entry.target);
+          revealAndClean(entry.target);
         }
       });
     },
     {
-      threshold: 0.12,
-      rootMargin: '0px 0px -36px 0px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -30px 0px'
     }
   );
 
-  revealTargets.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.92) {
-      el.classList.add('is-visible');
-    } else {
-      observer.observe(el);
-    }
-  });
+  revealTargets.forEach((el) => observer.observe(el));
 }
 
 // 7. Interactive HD Dish Lightbox Modal on Featured Dish Cards

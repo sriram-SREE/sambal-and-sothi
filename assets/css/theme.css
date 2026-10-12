@@ -1121,9 +1121,9 @@ h1, h2, h3, h4, .section-title, .hero-title {
   visibility: hidden;
   pointer-events: none;
   transform: rotateY(0deg);
-  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), 
-              box-shadow 0.65s ease, 
-              opacity 0.35s ease;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+              opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 1;
 }
 
@@ -1132,7 +1132,7 @@ h1, h2, h3, h4, .section-title, .hero-title {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) scale(1);
   z-index: 10;
 }
 
@@ -1141,39 +1141,40 @@ h1, h2, h3, h4, .section-title, .hero-title {
   opacity: 1;
   visibility: visible;
   pointer-events: none;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) scale(0.99);
   z-index: 5;
 }
 
-/* Page flipping forward (0deg -> -180deg) */
+/* Page flipping forward (0deg -> -95deg with smooth fade so backside text never mirrors) */
 .native-book-page.flipping-forward {
-  opacity: 1;
+  opacity: 0;
   visibility: visible;
   z-index: 30;
-  transform: rotateY(-180deg);
-  box-shadow: -30px 20px 40px rgba(0, 0, 0, 0.7);
+  transform: rotateY(-95deg);
+  box-shadow: -24px 16px 36px rgba(0, 0, 0, 0.65);
 }
 
-/* Page flipping backward (-180deg -> 0deg) */
+/* Page flipping backward (-95deg -> 0deg) */
 .native-book-page.flipping-backward {
-  opacity: 1;
+  opacity: 0;
   visibility: visible;
   z-index: 30;
-  transform: rotateY(-180deg);
+  transform: rotateY(-95deg);
   transition: none;
 }
 
 .native-book-page.flipping-backward.flip-in {
-  transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), 
-              box-shadow 0.65s ease, 
-              opacity 0.35s ease;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1), 
+              opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
   transform: rotateY(0deg);
   box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.7);
 }
 
 /* Past flipped pages */
 .native-book-page.flipped {
-  transform: rotateY(-180deg);
+  transform: rotateY(-95deg);
   opacity: 0;
   visibility: hidden;
   z-index: 1;
@@ -4516,33 +4517,87 @@ body.admin-bar .contact-video-inner {
    FINAL 6 COMPLEMENTARY LUXURY SYSTEMS (100% COHESION ACROSS PC & MOBILE)
    ========================================================================== */
 
-/* 1. Cinema-Style Scroll-Reveal Entrance Choreography & Preloader Lock-In */
-.preloader-chef-container.lock-to-header {
-  transform: translate(-50%, -62%) scale(0.78) !important;
+/* 1. Unified Silk Editorial Glide System (Preloader, Page Transitions & Whole-Row Scroll Reveal) */
+html.ss-visited #preloader {
+  display: none !important;
   opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#iris-curtain,
+#ring-curtain,
+.curtain-overlay {
+  display: none !important;
+}
+
+.preloader {
+  transition: opacity 480ms cubic-bezier(0.22, 1, 0.36, 1), visibility 480ms ease !important;
+}
+
+.preloader-chef-logo-wrapper {
+  animation: ssChefSilkIntro 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+@keyframes ssChefSilkIntro {
+  0% { opacity: 0; transform: translate3d(0, 12px, 0) scale(0.94); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.preloader.hidden .preloader-chef-container,
+.preloader-chef-container.lock-to-header {
+  transform: translate(-50%, -50%) scale(1.03) !important;
+  opacity: 0 !important;
+  transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1), opacity 460ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+main.site-main,
+.contact-video-section,
+.contact-top-banner,
+.contact-main-section {
+  animation: ssSilkPageEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ssSilkPageEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+body.ss-page-leaving main.site-main,
+body.ss-page-leaving .contact-video-section,
+body.ss-page-leaving .contact-top-banner,
+body.ss-page-leaving .contact-main-section,
+body.ss-page-leaving .site-footer {
+  opacity: 0 !important;
+  transform: translate3d(0, -6px, 0) !important;
+  transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1), transform 200ms cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 .ss-reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1), transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
-.ss-reveal.ss-reveal-plate {
-  transform: translateY(24px) scale(0.94);
-  transition: opacity 0.82s cubic-bezier(0.22, 1, 0.36, 1), transform 0.82s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.ss-reveal.is-visible,
-.ss-reveal.ss-reveal-plate.is-visible {
-  opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
+.ss-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ss-reveal,
-  .ss-reveal.ss-reveal-plate {
+  main.site-main,
+  .contact-video-section,
+  .contact-top-banner,
+  .contact-main-section,
+  .ss-reveal {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -4896,6 +4951,7 @@ body.admin-bar .contact-video-inner {
   background: radial-gradient(ellipse at center, #124237 0%, #08221C 75%, #051612 100%) !important;
   padding: 1.15rem !important;
   z-index: 9998 !important;
+  transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1), visibility 300ms ease !important;
 }
 
 .mobile-nav-frame {
@@ -4913,6 +4969,12 @@ body.admin-bar .contact-video-inner {
   justify-content: space-between;
   text-align: center;
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.65);
+  transform: translate3d(0, 12px, 0) scale(0.98);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mobile-nav.active .mobile-nav-frame {
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 .mobile-nav-close {
