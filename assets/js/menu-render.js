@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>`;
     } else {
       
-      let catNames = pageCategories[i] ? pageCategories[i].join(' &amp; ') : '';
+      let catNames = pageCategories[i] ? pageCategories[i].map(escapeHtml).join(' &amp; ') : '';
 
       let itemsHtml = '';
       
@@ -155,9 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
             tagsHtml = '<div class="item-tags">' + item.tags.map(t => `<span class="item-tag">${escapeHtml(t)}</span>`).join('') + '</div>';
           }
           const cleanPrice = String(item.price || '').replace(/S\$/gi, '$');
+          const safeTagsAttr = escapeHtml((item.tags || []).join(','));
           
           return `
-            <div class="menu-page-item" data-tags="${(item.tags || []).join(',')}">
+            <div class="menu-page-item" data-tags="${safeTagsAttr}">
               <div class="menu-page-item-info">
                 <span class="item-name">${escapeHtml(item.name)}</span>
                 <span class="item-price">${escapeHtml(cleanPrice)}</span>
@@ -175,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
 
-    pagesHtml += `<div class="${pageClass}" data-page="${i}">${content}</div>`;
+    pagesHtml += `<div class="${pageClass}" data-page="${parseInt(i, 10)}">${content}</div>`;
   }
 
   // Inject pages
@@ -185,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navContainer && data.categoryPages) {
     let chipsHtml = '';
     for (const [cat, page] of Object.entries(data.categoryPages)) {
-        chipsHtml += `<button class="category-page-chip" data-page="${page}" onclick="if(typeof turnBookToPage === 'function') turnBookToPage(${page})">${cat}</button>`;
+        const safePage = parseInt(page, 10) || 1;
+        chipsHtml += `<button class="category-page-chip" data-page="${safePage}" onclick="if(typeof turnBookToPage === 'function') turnBookToPage(${safePage})">${escapeHtml(cat)}</button>`;
     }
     navContainer.innerHTML = chipsHtml;
   }

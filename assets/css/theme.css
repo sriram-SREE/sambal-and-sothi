@@ -3776,3 +3776,238 @@ html, body {
   }
 }
 
+/* ==========================================================================
+   END-TO-END ALIGNMENT PERFECTION (HOME -> MENU -> ABOUT -> CONTACT -> FOOTER)
+   ========================================================================== */
+
+/* 1. Global Container & Header Flush Vertical Axis Alignment */
+.header-container {
+  max-width: var(--ss-container-width, 1240px);
+  padding: 0.85rem 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .header-container {
+    gap: 0.75rem;
+  }
+  .btn-reserve {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .burger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+}
+
+/* 2. Hero Section CTA Symmetry on Small Mobile */
+@media (max-width: 480px) {
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    max-width: 320px;
+  }
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* 3. Social Media Band — Dynamic Card Count Auto-Fit Grid */
+@media (min-width: 993px) {
+  .social-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+/* 4. Artisanal Highlights (Zig-Zag) Container & Text Column Balance */
+.artisanal-container {
+  max-width: var(--ss-container-width, 1240px);
+}
+
+@media (min-width: 769px) {
+  .artisanal-content {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .artisanal-container {
+    padding: 0 1rem !important;
+  }
+}
+
+/* 5. Featured Dishes — 4-Column Symmetrical Desktop Grid & Centered Header on Menu Page */
+@media (min-width: 1120px) {
+  .dishes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  }
+}
+
+.dishes-section .section-header-flex:not(:has(> div:nth-child(2))) {
+  justify-content: center;
+  text-align: center;
+}
+
+.dishes-section .section-header-flex:not(:has(> div:nth-child(2))) .section-desc {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 6. Customer Reviews — Right Header Rating Badge & Dynamic Desktop Grid */
+.reviews-header {
+  align-items: flex-end;
+}
+
+.reviews-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.4rem;
+}
+
+.review-stars-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(18, 66, 55, 0.85);
+  border: 1px solid var(--color-border-gold-strong);
+  padding: 0.35rem 0.85rem;
+  border-radius: 2px;
+}
+
+.review-stars-badge .stars-gold {
+  color: var(--color-accent-gold-light);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.review-stars-badge .rating-score {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1;
+}
+
+.reviews-tag-sub {
+  margin-bottom: 0 !important;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+}
+
+@media (min-width: 769px) {
+  .reviews-grid {
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .reviews-header-right {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .reviews-grid {
+    margin-top: 1.25rem !important;
+  }
+}
+
+/* 7. Our Story & Opening Hours Tablet/Mobile Spacing */
+main.main-padding > .about-us-section:first-child {
+  border-top: none !important;
+}
+
+@media (max-width: 992px) {
+  .about-story-grid,
+  .hours-grid {
+    gap: 2.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hours-section {
+    padding-top: 2rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  .hours-grid {
+    gap: 1.5rem !important;
+  }
+}
+
+/* 8. Menu Book Controls Width & Back Cover Vertical Centering */
+.menu-book-controls-bottom {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-cover-page .makkhan-border-frame {
+  justify-content: center !important;
+  gap: 0.75rem !important;
+}
+
+/* 9. Contact Us Page — Video Top Offset, Equal-Height Form Card, and Mobile Spacing */
+.contact-video-inner {
+  padding-top: 79px;
+}
+
+body.admin-bar .contact-video-inner {
+  padding-top: calc(79px + 32px);
+}
+
+.contact-form-card-box .contact-form-card-inner,
+.contact-form-card-box .contact-form-wrapper,
+.contact-form-card-box .contact-demo-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+@media (max-width: 768px) {
+  .contact-video-inner {
+    padding-top: 52px !important;
+  }
+  body.admin-bar:has(#wpadminbar:not([style*="display: none"])) .contact-video-inner {
+    padding-top: calc(52px + 46px) !important;
+  }
+  .contact-top-banner {
+    padding: 2rem 0 1.75rem !important;
+  }
+  .contact-main-section:not(.main-padding) {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .contact-demo-form button[type="submit"],
+  .contact-form-wrapper button[type="submit"],
+  .contact-form-wrapper input[type="submit"] {
+    margin-bottom: 0 !important;
+  }
+  .contact-map-box {
+    height: 320px !important;
+    margin-bottom: 1rem !important;
+  }
+}
+
+/* 10. Footer Chef Emblem & Seamless Bottom Edge on Mobile */
+.footer-logo-img {
+  border-radius: 0 !important;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 0 !important;
+  }
+  .site-footer {
+    padding-bottom: 4.5rem !important;
+  }
+}
+
