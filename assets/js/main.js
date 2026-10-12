@@ -128,26 +128,10 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. UNIFIED SILK PRELOADER ENGINE (Once Per Session, Smooth Dissolve — No Upward Jump)
+// 1. UNIFIED ROYAL CHEF CREST PRELOADER ENGINE (Synchronized 850ms Hold + 460ms Silk Dissolve)
 function initPreloader() {
   const loader = document.getElementById('preloader');
   if (!loader) return;
-
-  let alreadyShown = false;
-  try {
-    alreadyShown = sessionStorage.getItem('ss_preloader_shown') === '1';
-  } catch (e) {}
-
-  if (alreadyShown) {
-    document.documentElement.classList.add('ss-visited');
-    loader.classList.add('hidden');
-    if (loader.parentNode) loader.parentNode.removeChild(loader);
-    return;
-  }
-
-  try {
-    sessionStorage.setItem('ss_preloader_shown', '1');
-  } catch (e) {}
 
   let dismissed = false;
   const dismissPreloader = () => {
@@ -155,17 +139,16 @@ function initPreloader() {
     dismissed = true;
     loader.classList.add('hidden');
     setTimeout(() => {
-      document.documentElement.classList.add('ss-visited');
       if (loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 500);
+    }, 480);
   };
 
   if (document.readyState === 'complete') {
-    setTimeout(dismissPreloader, 650);
+    setTimeout(dismissPreloader, 850);
   } else {
-    window.addEventListener('load', () => setTimeout(dismissPreloader, 650));
+    window.addEventListener('load', () => setTimeout(dismissPreloader, 750));
   }
-  setTimeout(dismissPreloader, 1400);
+  setTimeout(dismissPreloader, 1500);
 }
 
 // 2. UNIFIED SILK PAGE-TO-PAGE TRANSITION ENGINE (Zero clip-path stutter, bfcache-safe)
