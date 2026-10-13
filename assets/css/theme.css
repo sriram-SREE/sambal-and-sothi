@@ -4481,166 +4481,365 @@ body.admin-bar .contact-video-inner {
   display: none !important;
 }
 
-.preloader {
+/* =========================================================
+   SAMBAL & SOTHI — ROYAL BANANA LEAF PRELOADER & GOLD IRIS APERTURE
+   A botanical banana leaf drawn in fine gold line unfurls beneath the name,
+   its veins drawing in one by one, with the official Chef crest served on the leaf as a seal.
+   Exit: radial golden iris bloom expanding from the center of the leaf seal.
+   ========================================================= */
+
+html.ss-loading, html.ss-loading body {
+  overflow: hidden !important;
+}
+
+#ss-preloader {
+  --bg: #0D3129;
+  --bg-deep: #08221C;
+  --bg-card: #124237;
+  --ink: #F3EDE3;
+  --muted: #BDAF99;
+  --sub: #D6CBB8;
+  --gold: #E8C88A;
+  --gold-line: #C9A227;
+  --leaf: #A8C686;
+  --serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+  --sans: 'Jost', system-ui, -apple-system, sans-serif;
+  --ease: cubic-bezier(.76, 0, .24, 1);
+  --soft: cubic-bezier(.2, .7, .2, 1);
+  --s: 1;
+  --cx: 50vw;
+  --cy: 50vh;
+  --r: 0px;
+  --word-size: clamp(28px, 4.2vw, 48px);
+  --dw: .12s;
+  --dr: 1.4s;
+  --dt: 1.5s;
+  --ds: 1.25s;
   position: fixed !important;
   inset: 0 !important;
-  z-index: 10000 !important;
-  background: radial-gradient(ellipse at 50% 50%, #0D352B 0%, #08221C 55%, #04120E 100%) !important;
-  opacity: 1;
-  visibility: visible;
+  z-index: 100000 !important;
+  display: grid !important;
+  place-items: center !important;
+  color: var(--ink);
+  background: radial-gradient(ellipse at 50% 42%, var(--bg-card) 0%, var(--bg) 46%, var(--bg-deep) 100%) !important;
   pointer-events: auto;
   overflow: hidden !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: opacity 650ms cubic-bezier(0.76, 0, 0.24, 1),
-              visibility 650ms ease !important;
-  will-change: opacity;
 }
 
-.preloader::before,
-.preloader::after {
-  display: none !important;
-  content: none !important;
+#ss-preloader.is-quick {
+  --s: .5;
 }
 
-.preloader.hidden {
-  opacity: 0 !important;
+#ss-preloader.is-iris {
+  -webkit-mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--r), #000 calc(var(--r) + 1px)) !important;
+          mask-image: radial-gradient(circle at var(--cx) var(--cy), transparent var(--r), #000 calc(var(--r) + 1px)) !important;
+}
+
+#ss-preloader.is-done {
   visibility: hidden !important;
   pointer-events: none !important;
+  display: none !important;
 }
 
-/* Center Royal Emblem Stage */
-.preloader-chef-container {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate3d(-50%, -50%, 0) !important;
+.ss-c {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 1.15rem !important;
-  z-index: 2 !important;
-  width: max-content !important;
-  padding: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
+  text-align: center !important;
+  padding: 0 16px !important;
 }
 
-/* Royal Chef Crest Logo (Morphs Directly into Header Logo Slot) */
-.preloader-chef-logo-wrapper {
-  position: relative !important;
-  width: 140px !important;
-  height: 140px !important;
+/* ---------- Wordmark (Letters rise one by one) ---------- */
+.ss-word {
+  margin: 0 !important;
+  font-family: var(--serif) !important;
+  font-size: var(--word-size) !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .2em !important;
+  padding-left: .2em !important;
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: center !important;
-  transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: center center !important;
-  animation: ssMorphLogoReveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
-  will-change: transform;
-  z-index: 5 !important;
+  gap: .3em !important;
+  white-space: nowrap !important;
+  margin-bottom: 24px !important;
 }
 
-.preloader-chef-img {
+.ss-word .w, .ss-word .amp {
+  display: inline-flex !important;
+}
+
+.ss-word .amp {
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--gold) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-size: 1.12em !important;
+  margin-right: .2em !important;
+}
+
+.ss-ch {
+  display: inline-block !important;
+  overflow: hidden !important;
+  padding-bottom: .08em !important;
+  margin-bottom: -.08em !important;
+}
+
+.ss-ch > i {
+  display: inline-block !important;
+  font-style: inherit !important;
+  animation: ss-rise calc(0.9s * var(--s)) var(--ease) calc((var(--dw) + var(--i) * 32ms) * var(--s)) backwards !important;
+  transition: transform .55s cubic-bezier(.6, 0, .4, 1) calc(var(--i) * 16ms) !important;
+}
+
+.ss-rule {
+  width: 50px !important;
+  height: 1px !important;
+  background: var(--gold-line) !important;
+  margin: 22px 0 14px !important;
+  animation: ss-grow calc(1s * var(--s)) var(--ease) calc(var(--dr) * var(--s)) backwards !important;
+  transition: transform .45s var(--ease), opacity .4s !important;
+}
+
+.ss-tag {
+  margin: 0 !important;
+  font-family: var(--sans) !important;
+  font-weight: 400 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  letter-spacing: .34em !important;
+  padding-left: .34em !important;
+  text-transform: uppercase !important;
+  color: var(--sub) !important;
+  animation: ss-fade calc(1s * var(--s)) ease calc(var(--dt) * var(--s)) backwards !important;
+  transition: opacity .4s !important;
+}
+
+/* ---------- Chef Seal on Leaf ---------- */
+.ss-leaf {
+  position: relative !important;
+  width: min(460px, 90vw) !important;
+}
+
+.ss-leaf svg {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.ss-leaf .lf-unfurl {
+  transform-origin: 200px 70px !important;
+  animation: ss-unfurl calc(1.3s * var(--s)) var(--soft) calc(.38s * var(--s)) backwards !important;
+}
+
+.ss-leaf .lf-exit {
+  transform-origin: 200px 70px !important;
+  transition: transform .55s var(--ease), opacity .45s ease !important;
+}
+
+.ss-leaf .ln {
+  fill: none !important;
+  stroke: var(--gold) !important;
+  stroke-width: 1.1 !important;
+  stroke-linecap: round !important;
+  stroke-dasharray: 1 !important;
+  stroke-dashoffset: 1 !important;
+  animation: ss-draw calc(1.2s * var(--s)) var(--ease) calc(.65s * var(--s)) forwards !important;
+}
+
+.ss-leaf .ln.mid {
+  stroke-width: 1.6 !important;
+  animation-delay: calc(.42s * var(--s)) !important;
+}
+
+.ss-leaf .ln.stem {
+  stroke-width: 2.2 !important;
+  animation-duration: calc(.45s * var(--s)) !important;
+  animation-delay: calc(.38s * var(--s)) !important;
+}
+
+.ss-leaf .vein {
+  fill: none !important;
+  stroke: var(--gold) !important;
+  stroke-width: .6 !important;
+  opacity: .42 !important;
+  stroke-linecap: round !important;
+  stroke-dasharray: 1 !important;
+  stroke-dashoffset: 1 !important;
+  animation: ss-draw calc(.42s * var(--s)) var(--soft) calc((.95s + var(--k) * 28ms) * var(--s)) forwards !important;
+}
+
+.ss-leaf .lf-fill {
+  fill: rgba(168, 198, 134, .09) !important;
+  opacity: 0 !important;
+  animation: ss-show calc(1s * var(--s)) ease calc(1.25s * var(--s)) forwards !important;
+}
+
+.ss-seal.on-leaf {
+  position: absolute !important;
+  left: 50.0% !important;
+  top: 46.6% !important;
+  margin: 0 !important;
+  width: 62px !important;
+  aspect-ratio: 215 / 253 !important;
+  transform: translate(-51.6%, -59.3%) !important;
+  animation: ss-seal-leaf calc(.8s * var(--s)) var(--soft) calc(var(--ds) * var(--s)) backwards !important;
+  transition: opacity .4s ease, transform .5s var(--ease) !important;
+}
+
+.ss-seal img {
+  position: relative !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   display: block !important;
-  background: transparent !important;
-  filter: drop-shadow(0 14px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 24px rgba(232, 200, 138, 0.35)) !important;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .55)) !important;
 }
 
-/* Brand Typography in Pure Gold-Leaf */
-.preloader-brand-text {
-  font-family: var(--font-heading) !important;
-  font-size: 1.55rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.28em !important;
-  text-transform: uppercase !important;
-  color: var(--color-accent-gold-light, #E8C88A) !important;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85) !important;
-  opacity: 0;
-  transform: translate3d(0, 12px, 0);
-  animation: ssMorphTextFadeUp 550ms cubic-bezier(0.22, 1, 0.36, 1) 180ms forwards !important;
-  text-align: center !important;
-  line-height: 1.25 !important;
-  white-space: nowrap !important;
+.ss-seal-ring {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
 }
 
-.preloader-brand-text::after {
-  content: "SINGAPORE STYLE INDIAN FOOD";
-  display: block;
-  font-family: var(--font-body) !important;
-  font-size: 0.72rem !important;
+.ss-seal-ring .disc {
+  fill: #0E3A30 !important;
+}
+
+.ss-seal-ring .ring {
+  fill: none !important;
+  stroke: var(--gold-line) !important;
+  stroke-width: 1 !important;
+  vector-effect: non-scaling-stroke !important;
+  stroke-dasharray: 1 !important;
+  stroke-dashoffset: 1 !important;
+  animation: ss-draw calc(1s * var(--s)) var(--ease) calc((var(--ds) - .05s) * var(--s)) forwards !important;
+}
+
+.ss-mono {
+  width: 100% !important;
+  height: 100% !important;
+  display: grid !important;
+  place-items: center !important;
+  font: italic 400 20px/1 var(--serif) !important;
+  color: var(--gold) !important;
+}
+
+/* ---------- Corners Footers ---------- */
+.ss-foot {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  gap: 16px !important;
+  padding: 0 clamp(16px, 4vw, 48px) clamp(18px, 4vh, 36px) !important;
+  font-family: var(--sans) !important;
   font-weight: 400 !important;
-  letter-spacing: 0.38em !important;
-  color: rgba(232, 200, 138, 0.8) !important;
-  margin-top: 0.45rem !important;
+  font-size: 10.5px !important;
+  line-height: 1.6 !important;
+  letter-spacing: .28em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  animation: ss-fade 1.2s ease calc(.45s * var(--s)) backwards !important;
+  transition: opacity .4s !important;
 }
 
-/* Polished Champagne-Gold Hairline */
-.preloader-ripple-ring {
-  width: 130px !important;
-  height: 1px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  background: linear-gradient(90deg, transparent 0%, #C9A227 25%, #FFF2C2 50%, #C9A227 75%, transparent 100%) !important;
-  box-shadow: 0 0 14px rgba(232, 200, 138, 0.55) !important;
-  transform: scaleX(0);
-  transform-origin: center center;
-  animation: ssMorphLineExpand 500ms cubic-bezier(0.22, 1, 0.36, 1) 260ms forwards !important;
+.ss-foot .gold {
+  color: var(--gold) !important;
 }
 
-@keyframes ssMorphLogoReveal {
-  0% {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.ss-edge {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  box-sizing: border-box !important;
+  border: 1.5px solid var(--gold) !important;
+  border-radius: 50% !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  box-shadow: 0 0 45px rgba(232, 200, 138, .45), 0 0 20px rgba(0, 0, 0, .5) !important;
 }
 
-@keyframes ssMorphTextFadeUp {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 12px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+#ss-preloader.is-iris .ss-edge {
+  opacity: 1 !important;
 }
 
-@keyframes ssMorphLineExpand {
-  0% {
-    transform: scaleX(0);
-    opacity: 0.3;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
+/* ---------- Exit States ---------- */
+#ss-preloader.is-out .ss-ch > i {
+  transform: translateY(-115%) !important;
+}
+
+#ss-preloader.is-out .ss-rule {
+  transform: scaleX(0) !important;
+}
+
+#ss-preloader.is-out .ss-tag,
+#ss-preloader.is-out .ss-foot {
+  opacity: 0 !important;
+}
+
+#ss-preloader.is-out .lf-exit {
+  transform: scaleY(.08) !important;
+  opacity: 0 !important;
+}
+
+#ss-preloader.is-out .ss-seal.on-leaf {
+  transform: translate(-51.6%, -59.3%) scale(.9) !important;
+  opacity: 0 !important;
+}
+
+@keyframes ss-rise {
+  from { transform: translateY(115%); }
+}
+
+@keyframes ss-grow {
+  from { transform: scaleX(0); }
+}
+
+@keyframes ss-fade {
+  from { opacity: 0; }
+}
+
+@keyframes ss-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes ss-show {
+  to { opacity: 1; }
+}
+
+@keyframes ss-unfurl {
+  from { transform: scaleY(.12) scaleX(.94); }
+}
+
+@keyframes ss-seal-leaf {
+  from { opacity: 0; transform: translate(-51.6%, -59.3%) scale(.85); }
 }
 
 /* Mobile Screen Tuning */
-@media (max-width: 768px) {
-  .preloader-chef-logo-wrapper {
-    width: 110px !important;
-    height: 110px !important;
-  }
-  .preloader-brand-text {
-    font-size: 1.25rem !important;
-    letter-spacing: 0.22em !important;
-  }
-  .preloader-brand-text::after {
-    font-size: 0.62rem !important;
-    letter-spacing: 0.28em !important;
-  }
+@media (max-width: 520px) {
+  .ss-word { letter-spacing: .13em !important; }
+  .ss-tag { font-size: 9.5px !important; letter-spacing: .24em !important; }
+  .ss-seal.on-leaf { width: 50px !important; }
+  .ss-street, .ss-hours-label { display: none !important; }
+  .ss-foot { font-size: 9.5px !important; letter-spacing: .2em !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ss-preloader * { animation: none !important; }
+  .ss-leaf .ln, .ss-leaf .vein, .ss-seal-ring .ring { stroke-dashoffset: 0 !important; }
+  .ss-leaf .lf-fill { opacity: 1 !important; }
 }
 
 /* Silky Editorial Page-to-Page Navigation (Zero Door Slamming, Instant & Regal) */

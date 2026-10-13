@@ -128,70 +128,131 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. ROYAL CREST-TO-HEADER MORPH & VELVET BLOOM ENGINE (Apple / Ultra-Luxury Agency Standard)
+// 1. ROYAL BANANA LEAF PRELOADER & GOLD IRIS APERTURE ENGINE
 function initPreloader() {
-  const loader = document.getElementById('preloader');
-  if (!loader) return;
+  const pl = document.getElementById('ss-preloader');
+  if (!pl) return;
 
-  const headerLogo = document.querySelector('.site-header .logo-badge-wrapper');
-  const preLogo = loader.querySelector('.preloader-chef-logo-wrapper');
-  const preText = loader.querySelector('.preloader-brand-text');
-  const preLine = loader.querySelector('.preloader-ripple-ring');
+  const root = document.documentElement;
+  const edge = pl.querySelector('.ss-edge');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  let morphed = false;
-  const executeMorph = () => {
-    if (morphed) return;
-    morphed = true;
-
-    if (headerLogo && preLogo) {
-      const startRect = preLogo.getBoundingClientRect();
-      const endRect = headerLogo.getBoundingClientRect();
-
-      // Compute center-to-center delta and scale
-      const startCenterX = startRect.left + startRect.width / 2;
-      const startCenterY = startRect.top + startRect.height / 2;
-      const endCenterX = endRect.left + endRect.width / 2;
-      const endCenterY = endRect.top + endRect.height / 2;
-
-      const deltaX = endCenterX - startCenterX;
-      const deltaY = endCenterY - startCenterY;
-      const scale = endRect.width / startRect.width;
-
-      // 1. Fade the subtitle and hairline away smoothly
-      if (preText) {
-        preText.style.transition = 'opacity 220ms ease, transform 220ms ease';
-        preText.style.opacity = '0';
-        preText.style.transform = 'translate3d(0, -6px, 0)';
-      }
-      if (preLine) {
-        preLine.style.transition = 'opacity 180ms ease';
-        preLine.style.opacity = '0';
-      }
-
-      // 2. Morph: Glide and scale the center crest directly into the header logo slot
-      preLogo.style.transition = 'transform 640ms cubic-bezier(0.76, 0, 0.24, 1)';
-      preLogo.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`;
-
-      // 3. Dissolve the preloader backdrop in a buttery silk aperture
-      loader.style.transition = 'opacity 640ms cubic-bezier(0.76, 0, 0.24, 1)';
-      loader.style.opacity = '0';
-
-      // 4. Clean up after morph finishes
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        loader.style.display = 'none';
-      }, 660);
-    } else {
-      // Graceful fallback
-      loader.classList.add('hidden');
-      setTimeout(() => {
-        loader.style.display = 'none';
-      }, 400);
+  // Split the wordmark into masked letters with staggered reveal
+  let idx = 0;
+  pl.querySelectorAll('.ss-word .w, .ss-word .amp').forEach((el) => {
+    const t = el.textContent;
+    el.textContent = '';
+    for (let k = 0; k < t.length; k++) {
+      const m = document.createElement('span');
+      m.className = 'ss-ch';
+      const c = document.createElement('i');
+      c.textContent = t[k];
+      c.style.setProperty('--i', idx++);
+      m.appendChild(c);
+      el.appendChild(m);
     }
-  };
+  });
 
-  // Hold for 600ms so user admires the gold seal, then smoothly morph into header
-  setTimeout(executeMorph, 600);
+  let first = true;
+  try {
+    first = sessionStorage.getItem('ss-visited') !== '1';
+    sessionStorage.setItem('ss-visited', '1');
+  } catch (e) {}
+
+  if (!first) pl.classList.add('is-quick');
+  const S = first ? 1 : 0.5;
+  const MIN = parseInt(pl.getAttribute('data-min') || (first ? '2100' : '900'), 10);
+  const MAX = 4500;
+  root.classList.add('ss-loading');
+  const start = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+  let leaving = false;
+
+  function easeQ(k) { return k < 0.5 ? 8 * k * k * k * k : 1 - Math.pow(-2 * k + 2, 4) / 2; }
+
+  function tween(dur, delay, step, done) {
+    setTimeout(() => {
+      const t0 = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+      function f(now) {
+        const k = Math.min(1, (now - t0) / dur);
+        step(k);
+        if (k < 1) requestAnimationFrame(f);
+        else if (done) done();
+      }
+      requestAnimationFrame(f);
+    }, delay || 0);
+  }
+
+  function farthest(cx, cy) {
+    return Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy)) + 36;
+  }
+
+  function iris(cx, cy, a, b, dur, done) {
+    pl.style.setProperty('--cx', cx + 'px');
+    pl.style.setProperty('--cy', cy + 'px');
+    tween(dur, 0, (k) => {
+      const r = a + (b - a) * easeQ(k);
+      const er = r + 3;
+      pl.style.setProperty('--r', r + 'px');
+      if (edge) {
+        edge.style.width = edge.style.height = (er * 2) + 'px';
+        edge.style.transform = 'translate(' + (cx - er) + 'px,' + (cy - er) + 'px)';
+        edge.style.opacity = a < b ? String(1 - Math.pow(k, 3)) : String(Math.min(1, (1 - k) * 4 + 0.2));
+      }
+    }, done);
+  }
+
+  function leave() {
+    if (leaving) return;
+    leaving = true;
+    const nowTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+    const wait = Math.max(0, MIN - (nowTime - start));
+
+    setTimeout(() => {
+      pl.classList.add('is-out');
+      if (reduce) {
+        pl.style.transition = 'opacity 0.4s ease';
+        pl.style.opacity = '0';
+        root.classList.remove('ss-loading');
+        setTimeout(() => {
+          pl.classList.add('is-done');
+          pl.style.display = 'none';
+        }, 420);
+        return;
+      }
+
+      const hold = 420;
+      setTimeout(() => {
+        const seal = pl.querySelector('.ss-seal') || pl.querySelector('.ss-c');
+        const rc = seal ? seal.getBoundingClientRect() : { left: window.innerWidth / 2 - 30, top: window.innerHeight / 2 - 30, width: 60, height: 60 };
+        const cx = rc.left + rc.width / 2;
+        const cy = rc.top + rc.height / 2;
+        pl.style.setProperty('--r', '0px');
+        pl.classList.add('is-iris');
+        root.classList.remove('ss-loading');
+
+        iris(cx, cy, 0, farthest(cx, cy), 950, () => {
+          pl.classList.add('is-done');
+          pl.classList.remove('is-iris');
+          pl.style.display = 'none';
+        });
+      }, hold);
+    }, wait);
+  }
+
+  if (document.readyState === 'complete') {
+    leave();
+  } else {
+    window.addEventListener('load', leave);
+  }
+  setTimeout(leave, MAX);
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      pl.className = 'is-out is-done';
+      pl.style.display = 'none';
+      root.classList.remove('ss-loading');
+    }
+  });
 }
 
 // 2. SILKY EDITORIAL PAGE-TO-PAGE NAVIGATION ENGINE (Zero Door Slamming, Instant & Regal)
