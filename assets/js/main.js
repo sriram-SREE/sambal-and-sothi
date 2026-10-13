@@ -128,32 +128,28 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. ROYAL SPLIT-DOOR CURTAIN & GOLD HAIRLINE PRELOADER ENGINE (Consistent 720ms Hold Across All Pages)
+// 1. ROYAL PALACE THEATER CURTAIN PRELOADER ENGINE
 function initPreloader() {
   const loader = document.getElementById('preloader');
   if (!loader) return;
 
   let dismissed = false;
-  const openRoyalDoors = () => {
+  const drawRoyalCurtains = () => {
     if (dismissed) return;
     dismissed = true;
-    loader.classList.remove('closing');
     loader.classList.add('hidden');
   };
 
   const elapsed = (typeof performance !== 'undefined' && performance.now) ? performance.now() : 0;
   const remaining = Math.max(480, 740 - Math.min(elapsed, 260));
-  setTimeout(openRoyalDoors, remaining);
+  setTimeout(drawRoyalCurtains, remaining);
 }
 
-// 2. ROYAL SPLIT-DOOR PAGE-TO-PAGE TRANSITION ENGINE (Zero Blink, Zero Header Jump, bfcache-safe)
+// 2. ROYAL SILK VEIL PAGE-TO-PAGE TRANSITION ENGINE (Zero Door Slamming, Fluid & Regal)
 function initPageTransitions() {
   window.addEventListener('pageshow', () => {
-    const loader = document.getElementById('preloader');
-    if (loader && loader.classList.contains('closing')) {
-      loader.classList.remove('closing');
-      loader.classList.add('hidden');
-    }
+    const veil = document.getElementById('ss-page-veil');
+    if (veil) veil.classList.remove('active');
   });
 
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -165,6 +161,11 @@ function initPageTransitions() {
     if (!href || href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:') || a.target === '_blank' || /^https?:/i.test(href)) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey) return;
 
+    // Same-page click: do nothing
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const targetPath = href.split('?')[0].split('#')[0].split('/').pop() || 'index.html';
+    if (currentPath === targetPath) return;
+
     e.preventDefault();
 
     if (isReduced) {
@@ -172,13 +173,12 @@ function initPageTransitions() {
       return;
     }
 
-    const loader = document.getElementById('preloader');
-    if (loader) {
-      loader.classList.remove('hidden');
-      loader.classList.add('closing');
+    const veil = document.getElementById('ss-page-veil');
+    if (veil) {
+      veil.classList.add('active');
       setTimeout(() => {
         window.location.href = href;
-      }, 330);
+      }, 220);
     } else {
       window.location.href = href;
     }
