@@ -137,21 +137,23 @@ function initPreloader() {
   const edge = pl.querySelector('.ss-edge');
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Split the wordmark into masked letters with staggered reveal
-  let idx = 0;
-  pl.querySelectorAll('.ss-word .w, .ss-word .amp').forEach((el) => {
-    const t = el.textContent;
-    el.textContent = '';
-    for (let k = 0; k < t.length; k++) {
-      const m = document.createElement('span');
-      m.className = 'ss-ch';
-      const c = document.createElement('i');
-      c.textContent = t[k];
-      c.style.setProperty('--i', idx++);
-      m.appendChild(c);
-      el.appendChild(m);
-    }
-  });
+  // Split title letters if not already split
+  if (!pl.querySelector('.ss-ch')) {
+    let idx = 0;
+    pl.querySelectorAll('.ss-word .w, .ss-word .amp').forEach((el) => {
+      const t = el.textContent;
+      el.textContent = '';
+      for (let k = 0; k < t.length; k++) {
+        const m = document.createElement('span');
+        m.className = 'ss-ch';
+        const c = document.createElement('i');
+        c.textContent = t[k];
+        c.style.setProperty('--i', idx++);
+        m.appendChild(c);
+        el.appendChild(m);
+      }
+    });
+  }
 
   let first = true;
   try {
@@ -160,9 +162,9 @@ function initPreloader() {
   } catch (e) {}
 
   if (!first) pl.classList.add('is-quick');
-  const S = first ? 1 : 0.5;
-  const MIN = parseInt(pl.getAttribute('data-min') || (first ? '2100' : '900'), 10);
-  const MAX = 4500;
+  const S = first ? 1 : 0.55;
+  const MIN = first ? 2100 : 850;
+  const MAX = 4200;
   root.classList.add('ss-loading');
   const start = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
   let leaving = false;
@@ -183,7 +185,7 @@ function initPreloader() {
   }
 
   function farthest(cx, cy) {
-    return Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy)) + 36;
+    return Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy)) + 40;
   }
 
   function iris(cx, cy, a, b, dur, done) {
@@ -196,7 +198,7 @@ function initPreloader() {
       if (edge) {
         edge.style.width = edge.style.height = (er * 2) + 'px';
         edge.style.transform = 'translate(' + (cx - er) + 'px,' + (cy - er) + 'px)';
-        edge.style.opacity = a < b ? String(1 - Math.pow(k, 3)) : String(Math.min(1, (1 - k) * 4 + 0.2));
+        edge.style.opacity = a < b ? String(1 - Math.pow(k, 3)) : '1';
       }
     }, done);
   }
@@ -220,17 +222,17 @@ function initPreloader() {
         return;
       }
 
-      const hold = 420;
+      const hold = 380;
       setTimeout(() => {
         const seal = pl.querySelector('.ss-seal') || pl.querySelector('.ss-c');
-        const rc = seal ? seal.getBoundingClientRect() : { left: window.innerWidth / 2 - 30, top: window.innerHeight / 2 - 30, width: 60, height: 60 };
+        const rc = seal ? seal.getBoundingClientRect() : { left: window.innerWidth / 2 - 35, top: window.innerHeight / 2 - 35, width: 70, height: 70 };
         const cx = rc.left + rc.width / 2;
         const cy = rc.top + rc.height / 2;
         pl.style.setProperty('--r', '0px');
         pl.classList.add('is-iris');
         root.classList.remove('ss-loading');
 
-        iris(cx, cy, 0, farthest(cx, cy), 950, () => {
+        iris(cx, cy, 0, farthest(cx, cy), 920, () => {
           pl.classList.add('is-done');
           pl.classList.remove('is-iris');
           pl.style.display = 'none';
@@ -255,8 +257,7 @@ function initPreloader() {
   });
 }
 
-// 2. SILKY EDITORIAL PAGE-TO-PAGE NAVIGATION ENGINE (Zero Door Slamming, Instant & Regal)
-function initPageTransitions() {
+// function initPageTransitions() {
   document.body.classList.remove('ss-page-exiting');
 
   window.addEventListener('pageshow', () => {
