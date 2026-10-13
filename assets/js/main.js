@@ -131,7 +131,8 @@ document.addEventListener('pointerdown', () => {
 // 1. ROYAL BANANA LEAF PRELOADER & GOLD IRIS APERTURE ENGINE
 function initPreloader() {
   const pl = document.getElementById('ss-preloader');
-  if (!pl) return;
+  if (!pl || pl.dataset.managed) return;
+  pl.dataset.managed = 'true';
 
   const root = document.documentElement;
   const edge = pl.querySelector('.ss-edge');
@@ -257,7 +258,7 @@ function initPreloader() {
   });
 }
 
-// function initPageTransitions() {
+function initPageTransitions() {
   document.body.classList.remove('ss-page-exiting');
 
   window.addEventListener('pageshow', () => {
