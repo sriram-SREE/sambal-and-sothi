@@ -128,28 +128,78 @@ document.addEventListener('pointerdown', () => {
   } catch(e) {}
 }, { once: true });
 
-// 1. ROYAL PALACE THEATER CURTAIN PRELOADER ENGINE
+// 1. ROYAL CREST-TO-HEADER MORPH & VELVET BLOOM ENGINE (Apple / Ultra-Luxury Agency Standard)
 function initPreloader() {
   const loader = document.getElementById('preloader');
   if (!loader) return;
 
-  let dismissed = false;
-  const drawRoyalCurtains = () => {
-    if (dismissed) return;
-    dismissed = true;
-    loader.classList.add('hidden');
+  const headerLogo = document.querySelector('.site-header .logo-badge-wrapper');
+  const preLogo = loader.querySelector('.preloader-chef-logo-wrapper');
+  const preText = loader.querySelector('.preloader-brand-text');
+  const preLine = loader.querySelector('.preloader-ripple-ring');
+
+  let morphed = false;
+  const executeMorph = () => {
+    if (morphed) return;
+    morphed = true;
+
+    if (headerLogo && preLogo) {
+      const startRect = preLogo.getBoundingClientRect();
+      const endRect = headerLogo.getBoundingClientRect();
+
+      // Compute center-to-center delta and scale
+      const startCenterX = startRect.left + startRect.width / 2;
+      const startCenterY = startRect.top + startRect.height / 2;
+      const endCenterX = endRect.left + endRect.width / 2;
+      const endCenterY = endRect.top + endRect.height / 2;
+
+      const deltaX = endCenterX - startCenterX;
+      const deltaY = endCenterY - startCenterY;
+      const scale = endRect.width / startRect.width;
+
+      // 1. Fade the subtitle and hairline away smoothly
+      if (preText) {
+        preText.style.transition = 'opacity 220ms ease, transform 220ms ease';
+        preText.style.opacity = '0';
+        preText.style.transform = 'translate3d(0, -6px, 0)';
+      }
+      if (preLine) {
+        preLine.style.transition = 'opacity 180ms ease';
+        preLine.style.opacity = '0';
+      }
+
+      // 2. Morph: Glide and scale the center crest directly into the header logo slot
+      preLogo.style.transition = 'transform 640ms cubic-bezier(0.76, 0, 0.24, 1)';
+      preLogo.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scale})`;
+
+      // 3. Dissolve the preloader backdrop in a buttery silk aperture
+      loader.style.transition = 'opacity 640ms cubic-bezier(0.76, 0, 0.24, 1)';
+      loader.style.opacity = '0';
+
+      // 4. Clean up after morph finishes
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        loader.style.display = 'none';
+      }, 660);
+    } else {
+      // Graceful fallback
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 400);
+    }
   };
 
-  const elapsed = (typeof performance !== 'undefined' && performance.now) ? performance.now() : 0;
-  const remaining = Math.max(480, 740 - Math.min(elapsed, 260));
-  setTimeout(drawRoyalCurtains, remaining);
+  // Hold for 600ms so user admires the gold seal, then smoothly morph into header
+  setTimeout(executeMorph, 600);
 }
 
-// 2. ROYAL SILK VEIL PAGE-TO-PAGE TRANSITION ENGINE (Zero Door Slamming, Fluid & Regal)
+// 2. SILKY EDITORIAL PAGE-TO-PAGE NAVIGATION ENGINE (Zero Door Slamming, Instant & Regal)
 function initPageTransitions() {
+  document.body.classList.remove('ss-page-exiting');
+
   window.addEventListener('pageshow', () => {
-    const veil = document.getElementById('ss-page-veil');
-    if (veil) veil.classList.remove('active');
+    document.body.classList.remove('ss-page-exiting');
   });
 
   const isReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -173,15 +223,10 @@ function initPageTransitions() {
       return;
     }
 
-    const veil = document.getElementById('ss-page-veil');
-    if (veil) {
-      veil.classList.add('active');
-      setTimeout(() => {
-        window.location.href = href;
-      }, 220);
-    } else {
+    document.body.classList.add('ss-page-exiting');
+    setTimeout(() => {
       window.location.href = href;
-    }
+    }, 180);
   });
 }
 
