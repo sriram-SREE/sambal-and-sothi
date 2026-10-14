@@ -5529,7 +5529,7 @@ body.ss-page-exiting .site-footer {
     width: 100% !important;
     max-width: 480px !important;
     margin: 0 auto !important;
-    padding: 0 2.25rem !important; /* Generous 36px gutter so it NEVER hugs the left corner */
+    padding: 0 1.75rem !important; /* Elegant 28px gap on left matching reference */
     box-sizing: border-box !important;
   }
   .footer-grid {
