@@ -2075,30 +2075,40 @@ body.admin-bar .site-header {
 }
 
 .book-turn-controls-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 0 auto 0.5rem !important;
+  text-align: center !important;
 }
 
 .book-turn-buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex: 1 1 auto;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.85rem !important;
+  margin: 0 auto !important;
+  width: auto !important;
 }
 
 .book-page-indicator {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent-gold-light);
-  white-space: nowrap;
-  padding: 0.35rem 0.65rem;
-  background: rgba(232, 200, 138, 0.1);
-  border: 1px solid var(--color-border-gold);
+  font-family: var(--font-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--color-accent-gold-light) !important;
+  white-space: nowrap !important;
+  padding: 0.35rem 0.85rem !important;
+  background: rgba(232, 200, 138, 0.08) !important;
+  border: 1px solid var(--color-border-gold) !important;
+  border-radius: 999px !important;
+  margin: 0 auto !important;
+  display: inline-block !important;
 }
 
 @media (max-width: 768px) {
@@ -3992,40 +4002,74 @@ section, .section {
   }
 
   .header-container {
-    min-height: var(--ss-header-height-mobile, 78px) !important;
-    padding: 10px var(--ss-header-gutter-mobile, 16px) !important;
-    gap: 10px !important;
+    min-height: var(--ss-header-height-mobile, 74px) !important;
+    padding: 10px 12px !important;
+    gap: 8px !important;
     flex-wrap: nowrap !important;
   }
 
   .brand-logo {
-    gap: 10px !important;
+    gap: 8px !important;
     min-width: 0 !important;
-    flex-shrink: 1 !important;
+    flex-shrink: 0 !important;
   }
 
   .logo-badge-wrapper,
   .logo-badge-img {
     width: auto !important;
-    height: var(--ss-logo-height-mobile, 46px) !important;
-    max-height: var(--ss-logo-height-mobile, 46px) !important;
+    height: 42px !important;
+    max-height: 42px !important;
   }
 
   .brand-name {
-    font-size: 20.5px !important;
-    line-height: 1.12 !important;
-    letter-spacing: 0.06em !important;
+    font-size: clamp(16px, 4.4vw, 19px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
   }
 
   .brand-sub {
-    font-size: 10px !important;
-    line-height: 1.25 !important;
-    letter-spacing: 0.13em !important;
+    font-size: 8.5px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.09em !important;
+    white-space: nowrap !important;
   }
 
-  /* Hide redundant top-bar phone button on mobile phones (CTA is in Hero & Hamburger Drawer) */
+  /* Mobile Call to Reserve button: Beautiful prominent gold pill right next to hamburger */
   .site-header .btn-reserve {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    padding: 0.38rem 0.65rem !important;
+    min-height: 36px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    border-radius: 999px !important;
+    margin-left: auto !important;
+    margin-right: 4px !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    background: linear-gradient(135deg, #F5DFA3 0%, #E8C88A 52%, #D4AC53 100%) !important;
+    color: #08221C !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 235, 175, 0.6) !important;
+  }
+  .site-header .btn-reserve .btn-reserve-icon-svg {
+    width: 12px !important;
+    height: 12px !important;
+    display: inline-block !important;
+    fill: currentColor !important;
+  }
+  .site-header .btn-reserve .btn-reserve-text-full {
     display: none !important;
+  }
+  .site-header .btn-reserve .btn-reserve-text-short {
+    display: inline-block !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
   }
 
   .burger-btn {
@@ -4453,9 +4497,7 @@ body.admin-bar .contact-video-inner {
   body {
     padding-bottom: 0 !important;
   }
-  .site-footer {
-    padding-bottom: 4.5rem !important;
-  }
+  .site-footer { padding-bottom: 2rem !important; }
   .footer-grid > div:not(:last-child) {
     padding-bottom: 1.35rem;
     border-bottom: 1px solid rgba(232, 200, 138, 0.14);
@@ -5393,3 +5435,260 @@ body.ss-page-exiting .site-footer {
 
 
 
+
+/* =============================================================
+   ULTRA-LUXURY STREAMLINED SIGNATURE FOOTER & MENU CTA SYSTEM
+   ============================================================= */
+.site-footer {
+  background: radial-gradient(circle at 50% 0%, #0d382e 0%, #08221c 65%, #051813 100%) !important;
+  border-top: 1px solid var(--color-border-gold) !important;
+  padding: 3.25rem 0 1.85rem !important;
+  color: var(--color-text-main) !important;
+  position: relative !important;
+}
+
+.footer-compact-container {
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  padding: 0 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+.footer-seal-wrap {
+  margin-bottom: 1.75rem !important;
+}
+
+.footer-seal-link {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.footer-seal-emblem {
+  width: 52px !important;
+  height: 52px !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--color-accent-gold-light) !important;
+  padding: 3px !important;
+  background: rgba(8, 34, 28, 0.7) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(232, 200, 138, 0.25) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.footer-seal-link:hover .footer-seal-emblem {
+  transform: scale(1.08) rotate(3deg) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 18px rgba(232, 200, 138, 0.45) !important;
+}
+
+.footer-seal-title {
+  font-family: var(--font-heading) !important;
+  font-size: 1.55rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.14em !important;
+  color: var(--color-accent-gold-light) !important;
+  text-transform: uppercase !important;
+  margin-top: 0.65rem !important;
+  line-height: 1.15 !important;
+}
+
+.footer-seal-tag {
+  font-family: var(--font-body) !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
+  color: var(--color-text-muted) !important;
+  margin-top: 0.25rem !important;
+}
+
+.footer-concierge-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 1.5rem 0 !important;
+  border-top: 1px solid rgba(232, 200, 138, 0.16) !important;
+  border-bottom: 1px solid rgba(232, 200, 138, 0.16) !important;
+  gap: 2rem !important;
+  flex-wrap: wrap !important;
+}
+
+.footer-info-block {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+  gap: 0.55rem !important;
+  flex: 1 1 300px !important;
+}
+
+.footer-info-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  font-size: 0.88rem !important;
+  line-height: 1.4 !important;
+  color: #D6CBB8 !important;
+}
+
+.footer-info-icon {
+  font-size: 1rem !important;
+  color: var(--color-accent-gold-light) !important;
+  flex-shrink: 0 !important;
+}
+
+.footer-open-pill {
+  display: inline-block !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  padding: 0.18rem 0.55rem !important;
+  background: rgba(33, 109, 84, 0.35) !important;
+  color: #8CE5BE !important;
+  border: 1px solid rgba(140, 229, 190, 0.35) !important;
+  border-radius: 999px !important;
+  margin-left: 0.45rem !important;
+  vertical-align: middle !important;
+}
+
+.footer-actions-block {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  text-align: right !important;
+  gap: 0.75rem !important;
+  flex: 1 1 300px !important;
+}
+
+.footer-call-reserve-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  padding: 0.65rem 1.4rem !important;
+  background: linear-gradient(135deg, #F5DFA3 0%, #E8C88A 52%, #D4AC53 100%) !important;
+  color: #08221C !important;
+  border-radius: 999px !important;
+  text-decoration: none !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  border: 1px solid rgba(255, 235, 175, 0.6) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+}
+
+.footer-call-reserve-btn:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.06) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 16px rgba(232, 200, 138, 0.3) !important;
+  color: #051813 !important;
+}
+
+.footer-call-reserve-btn .footer-phone-icon {
+  width: 15px !important;
+  height: 15px !important;
+  fill: #08221C !important;
+  flex-shrink: 0 !important;
+}
+
+.footer-call-reserve-btn .footer-btn-label {
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+}
+
+.footer-call-reserve-btn .footer-btn-phone {
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  padding-left: 0.4rem !important;
+  border-left: 1px solid rgba(8, 34, 28, 0.35) !important;
+}
+
+.footer-quick-channels {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  font-size: 0.8rem !important;
+  color: var(--color-text-muted) !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+}
+
+.footer-quick-channels a {
+  color: var(--color-accent-gold-light) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-quick-channels a:hover {
+  color: #FFFFFF !important;
+  text-decoration: underline !important;
+}
+
+.footer-dot {
+  color: rgba(232, 200, 138, 0.4) !important;
+}
+
+.footer-legal-bar {
+  margin-top: 1.5rem !important;
+  font-size: 0.76rem !important;
+  letter-spacing: 0.08em !important;
+  color: rgba(189, 175, 153, 0.75) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  flex-wrap: wrap !important;
+}
+
+.menu-book-reserve-cta {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 1.75rem auto 0.75rem !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 2.25rem 0 1.75rem !important;
+  }
+  .footer-concierge-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1.35rem !important;
+    padding: 1.25rem 0 !important;
+  }
+  .footer-info-block {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .footer-actions-block {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .footer-quick-channels {
+    justify-content: center !important;
+  }
+  .footer-call-reserve-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+  .menu-book-reserve-cta .footer-call-reserve-btn {
+    width: 100% !important;
+    max-width: 320px !important;
+  }
+}
