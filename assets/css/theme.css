@@ -5434,3 +5434,118 @@ body.ss-page-exiting .site-footer {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.45; transform: scale(0.85); }
 }
+
+/* ==========================================================================
+   ELEGANT CENTERED & BALANCED FOOTER SYSTEM (NEVER CORNERED)
+   ========================================================================== */
+.site-footer {
+  background-color: #061B16 !important;
+  border-top: 1px solid var(--color-border-gold) !important;
+  padding: 3rem 0 2rem !important;
+}
+
+.site-footer .container {
+  max-width: 1020px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+}
+
+.footer-grid {
+  display: grid !important;
+  grid-template-columns: 1.5fr 0.85fr 1fr 1.3fr !important;
+  gap: 2.5rem !important;
+  align-items: start !important;
+  justify-content: center !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.footer-heading {
+  font-family: var(--font-heading) !important;
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+  color: var(--color-accent-gold-light, #E8C88A) !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.footer-links {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.55rem !important;
+}
+
+.footer-links a {
+  color: var(--color-text-main, #F3EDE3) !important;
+  text-decoration: none !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.92rem !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-gold-light, #E8C88A) !important;
+}
+
+/* Tablet & Mobile Alignment (Centered, Symmetrical, Never Cornered) */
+@media (max-width: 992px) {
+  .site-footer .container {
+    max-width: 720px !important;
+    padding: 0 1.5rem !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 2.5rem 1.25rem 2rem !important;
+    text-align: center !important;
+  }
+  .site-footer .container {
+    max-width: 480px !important;
+    padding: 0 0.5rem !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.65rem !important;
+    text-align: center !important;
+    margin-bottom: 1.75rem !important;
+  }
+  .footer-grid > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .footer-heading {
+    text-align: center !important;
+    margin-bottom: 0.6rem !important;
+  }
+  .site-footer p,
+  .site-footer .section-desc {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 320px !important;
+  }
+  .footer-links {
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.65rem !important;
+  }
+  .footer-links a {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  .footer-grid > div:not(:last-child) {
+    padding-bottom: 1.5rem !important;
+    border-bottom: 1px solid rgba(232, 200, 138, 0.14) !important;
+  }
+  .site-footer .ss-live-status-badge {
+    margin: 0.65rem auto 0 !important;
+  }
+}
